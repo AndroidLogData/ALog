@@ -1,0 +1,18 @@
+ext {
+    compileSdkVersion = 26
+    buildToolsVersion = '26.0.2'
+    minSdkVersion = 14
+    targetSdkVersion = 26
+    sourceCompatibilityVersion = JavaVersion.VERSION_1_8
+    targetCompatibilityVersion = JavaVersion.VERSION_1_8
+
+    dep = [
+            supportV7 : 'com.android.support:appcompat-v7:26.1.0',
+            volley : 'com.android.volley:volley:1.0.0',
+            gson : 'com.google.code.gson:gson:2.8.2',
+            acrahttp : 'ch.acra:acra-http:5.0.0',
+            acracore : 'ch.acra:acra-core:5.0.0'
+    ]
+
+    isCi = "true" == System.getenv('CI')
+}
