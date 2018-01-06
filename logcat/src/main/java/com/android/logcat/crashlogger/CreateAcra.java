@@ -10,7 +10,7 @@ import org.acra.sender.HttpSender;
  * Created by Null on 2018-01-03.
  */
 
-@AcraHttpSender(uri = "http://192.168.0.7:8080/crash",
+@AcraHttpSender(uri = "http://192.168.0.8:8080/crash",
         httpMethod = HttpSender.Method.POST)
 public class CreateAcra extends Application {
     @Override

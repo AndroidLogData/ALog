@@ -13,7 +13,7 @@ public class HttpService implements ServiceInterface {
     private String makeURL() {
         Uri uri = new Uri.Builder()
                 .scheme("http")
-                .encodedAuthority("192.168.0.7:8080")
+                .encodedAuthority("192.168.0.8:8080")
                 .path("logdata")
                 .build();
         Log.i("URL", uri.toString());
