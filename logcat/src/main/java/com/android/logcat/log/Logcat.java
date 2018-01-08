@@ -163,7 +163,7 @@ public class Logcat {
         }
     }
 
-    public double getMemory() {
+    private double getMemory() {
         return memoryChecker.getMemoryPercentage();
     }
 

@@ -42,15 +42,15 @@ public class HttpOption {
     }
 
     public void setLogLevel(String level) {
-        setParams("logLevel", level);
+        setParams("level", level);
     }
 
     public void setLogMessage(String message) {
-        setParams("logMessage", message);
+        setParams("message", message);
     }
 
     public void setTime(long time) {
-        setParams("logTime", String.valueOf(time));
+        setParams("time", String.valueOf(time));
     }
 
     public void setTotalMemory(long totalMemory) {
@@ -62,7 +62,7 @@ public class HttpOption {
     }
 
     public void setMemoryPercentage(double percentage) {
-        setParams("percentage", String.valueOf(percentage));
+        setParams("memoryPercentage", String.valueOf(percentage));
     }
 
     public void setThreshold(long threshold) {
@@ -71,6 +71,22 @@ public class HttpOption {
 
     public void setLowMemory(boolean lowMemory) {
         setParams("lowMemory", String.valueOf(lowMemory));
+    }
+
+    public void setTag(String tag) {
+        setParams("tag", tag);
+    }
+
+    public void setDalvikPss(int dalvikPss) {
+        setParams("dalvikPss", String.valueOf(dalvikPss));
+    }
+
+    public void setOtherPss(int otherPss) {
+        setParams("dalvikPss", String.valueOf(otherPss));
+    }
+
+    public void setNativePss(int nativePss) {
+        setParams("dalvikPss", String.valueOf(nativePss));
     }
 
     public void setSecretKey(String secretKey) {

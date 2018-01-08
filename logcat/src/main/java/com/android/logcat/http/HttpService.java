@@ -25,6 +25,7 @@ public class HttpService implements ServiceInterface {
 
         option.setBodyContentType("application/x-www-form-urlencoded; charset=utf-8");
         option.setLogLevel(data.getLevel());
+        option.setTag(data.getTag());
         option.setLogMessage(data.getMsg());
         option.setTime(data.getTime());
         option.setAvailMemory(data.getAvailMemory());
@@ -32,6 +33,9 @@ public class HttpService implements ServiceInterface {
         option.setMemoryPercentage(data.getMemoryPercentage());
         option.setLowMemory(data.isLowMemory());
         option.setThreshold(data.getThreshold());
+        option.setDalvikPss(data.getDalvikPss());
+        option.setOtherPss(data.getOtherPss());
+        option.setNativePss(data.getNativePss());
 
         return option;
     }
@@ -48,14 +52,13 @@ public class HttpService implements ServiceInterface {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.i("Response", response);
+                        Log.i("Response", "success");
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.e("VolleyError", "error");
-                        Log.e("VolleyError", error.getMessage());
                     }
                 });
 
