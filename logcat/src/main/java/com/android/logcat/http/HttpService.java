@@ -23,7 +23,6 @@ public class HttpService implements ServiceInterface {
     private HttpOption httpOptionSetting(LogData data) {
         HttpOption option = new HttpOption();
 
-        option.setBodyContentType("application/x-www-form-urlencoded");
         option.setContentType("application/x-www-form-urlencoded");
         option.setLogLevel(data.getLevel());
         option.setTag(data.getTag());
@@ -47,7 +46,7 @@ public class HttpService implements ServiceInterface {
         HttpOption option = httpOptionSetting(data);
 
         VolleyCustomRequest request = new VolleyCustomRequest(
-                Request.Method.PUT,
+                Request.Method.POST,
                 url,
                 option,
                 new Response.Listener<String>() {
