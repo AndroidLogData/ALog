@@ -93,6 +93,10 @@ public class HttpOption {
         setHeaders("Content-Type", value);
     }
 
+    public void setAcceptEncoding(String value) {
+        setHeaders("Accept-Encoding", value);
+    }
+
     public void setSecretKey(String secretKey) {
         setHeaders("secretKey", secretKey);
     }

@@ -24,6 +24,7 @@ public class HttpService implements ServiceInterface {
         HttpOption option = new HttpOption();
 
         option.setContentType("application/x-www-form-urlencoded");
+        option.setAcceptEncoding("gzip, deflate");
         option.setLogLevel(data.getLevel());
         option.setTag(data.getTag());
         option.setLogMessage(data.getMsg());
