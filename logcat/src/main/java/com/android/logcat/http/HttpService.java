@@ -8,6 +8,10 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class HttpService implements ServiceInterface {
     private String makeURL() {
@@ -41,18 +45,41 @@ public class HttpService implements ServiceInterface {
         return option;
     }
 
+    private JSONObject makeJSON(LogData data) {
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("message", data.getMsg());
+            jsonObject.put("tag", data.getTag());
+            jsonObject.put("level", data.getLevel());
+            jsonObject.put("time", data.getTime());
+            jsonObject.put("totalMemory", data.getTotalMemory());
+            jsonObject.put("availMemory", data.getAvailMemory());
+            jsonObject.put("memoryPercentage", data.getMemoryPercentage());
+            jsonObject.put("threshold", data.getThreshold());
+            jsonObject.put("lowMemory", data.isLowMemory());
+            jsonObject.put("dalvikPss", data.getDalvikPss());
+            jsonObject.put("otherPss", data.getOtherPss());
+            jsonObject.put("totalPss", data.getTotalPss());
+            return jsonObject;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public void requestLogData(LogData data, final VolleyCallback callback) {
         String url = makeURL();
 
-        HttpOption option = httpOptionSetting(data);
+//        HttpOption option = httpOptionSetting(data);
+        JSONObject jsonObject = makeJSON(data);
 
-        VolleyCustomRequest request = new VolleyCustomRequest(
+        JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.POST,
                 url,
-                option,
-                new Response.Listener<String>() {
+                jsonObject,
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(String response) {
+                    public void onResponse(JSONObject response) {
                         Log.i("Response", "success");
                     }
                 },
@@ -63,10 +90,35 @@ public class HttpService implements ServiceInterface {
                     }
                 });
 
+//        VolleyCustomRequest request = new VolleyCustomRequest(
+//                Request.Method.POST,
+//                url,
+//                option,
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        Log.i("Response", "success");
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        Log.e("VolleyError", "error");
+//                    }
+//                });
+
 
         request.setRetryPolicy(new DefaultRetryPolicy(2000, 5, 1));
 
         addRequestQueue(request);
+    }
+
+    private void addRequestQueue(JsonObjectRequest request) {
+        try {
+            VolleyManager.getInstance().getRequestQueue().add(request);
+        } catch (IllegalAccessException e) {
+            Log.i("IllegalAccessException", e.getMessage());
+        }
     }
 
     private void addRequestQueue(VolleyCustomRequest request) {
