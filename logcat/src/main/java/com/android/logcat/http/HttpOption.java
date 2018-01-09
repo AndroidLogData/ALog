@@ -89,6 +89,10 @@ public class HttpOption {
         setParams("dalvikPss", String.valueOf(nativePss));
     }
 
+    public void setContentType(String value) {
+        setHeaders("Content-Type", value);
+    }
+
     public void setSecretKey(String secretKey) {
         setHeaders("secretKey", secretKey);
     }
