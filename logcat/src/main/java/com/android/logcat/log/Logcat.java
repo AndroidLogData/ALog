@@ -191,7 +191,7 @@ public class Logcat {
     }
 
     private StringBuilder buildLog() {
-        StackTraceElement ste = Thread.currentThread().getStackTrace()[0];
+        StackTraceElement ste = Thread.currentThread().getStackTrace()[1];
 
         StringBuilder sb = new StringBuilder();
 
