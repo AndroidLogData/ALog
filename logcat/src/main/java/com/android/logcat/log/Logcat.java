@@ -14,7 +14,7 @@ import com.android.logcat.http.VolleyManager;
 import com.android.logcat.memory.MemoryChecker;
 import com.android.logcat.util.LogData;
 
-import org.joda.time.LocalDate;
+import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
@@ -168,7 +168,7 @@ public class Logcat {
     }
 
     private String getTime() {
-        LocalDate date = LocalDate.now();
+        DateTime date = DateTime.now();
         DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
 
         return date.toString(fmt);
@@ -191,7 +191,7 @@ public class Logcat {
     }
 
     private StringBuilder buildLog() {
-        StackTraceElement ste = Thread.currentThread().getStackTrace()[3];
+        StackTraceElement ste = Thread.currentThread().getStackTrace()[0];
 
         StringBuilder sb = new StringBuilder();
 
