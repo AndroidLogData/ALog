@@ -14,6 +14,10 @@ import com.android.logcat.http.VolleyManager;
 import com.android.logcat.memory.MemoryChecker;
 import com.android.logcat.util.LogData;
 
+import org.joda.time.LocalDate;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 
 public class Logcat {
     private Context context;
@@ -78,7 +82,7 @@ public class Logcat {
             data.setLevel("v");
             data.setTag(buildLogTag());
             data.setMsg(msg);
-            data.setTime(System.currentTimeMillis());
+            data.setTime(getTime());
             logDataTransfer(data);
         }
     }
@@ -98,7 +102,7 @@ public class Logcat {
             data.setLevel("d");
             data.setTag(buildLogTag());
             data.setMsg(msg);
-            data.setTime(System.currentTimeMillis());
+            data.setTime(getTime());
             logDataTransfer(data);
         }
     }
@@ -118,7 +122,7 @@ public class Logcat {
             data.setLevel("i");
             data.setTag(buildLogTag());
             data.setMsg(msg);
-            data.setTime(System.currentTimeMillis());
+            data.setTime(getTime());
             logDataTransfer(data);
         }
     }
@@ -138,7 +142,7 @@ public class Logcat {
             data.setLevel("w");
             data.setTag(buildLogTag());
             data.setMsg(msg);
-            data.setTime(System.currentTimeMillis());
+            data.setTime(getTime());
             logDataTransfer(data);
         }
     }
@@ -158,9 +162,16 @@ public class Logcat {
             data.setLevel("e");
             data.setTag(buildLogTag());
             data.setMsg(msg);
-            data.setTime(System.currentTimeMillis());
+            data.setTime(getTime());
             logDataTransfer(data);
         }
+    }
+
+    private String getTime() {
+        LocalDate date = LocalDate.now();
+        DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+
+        return date.toString(fmt);
     }
 
     private double getMemory() {
@@ -180,7 +191,7 @@ public class Logcat {
     }
 
     private StringBuilder buildLog() {
-        StackTraceElement ste = Thread.currentThread().getStackTrace()[4];
+        StackTraceElement ste = Thread.currentThread().getStackTrace()[3];
 
         StringBuilder sb = new StringBuilder();
 

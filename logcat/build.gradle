@@ -36,4 +36,5 @@ dependencies {
     implementation dep.acrahttp
     implementation dep.acracore
     implementation dep.gson
+    implementation dep.jodatime
 }

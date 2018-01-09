@@ -11,7 +11,8 @@ ext {
             volley : 'com.android.volley:volley:1.0.0',
             gson : 'com.google.code.gson:gson:2.8.2',
             acrahttp : 'ch.acra:acra-http:5.0.0',
-            acracore : 'ch.acra:acra-core:5.0.0'
+            acracore : 'ch.acra:acra-core:5.0.0',
+            jodatime : 'joda-time:joda-time:2.9.9'
     ]
 
     isCi = "true" == System.getenv('CI')

@@ -70,7 +70,6 @@ public class HttpService implements ServiceInterface {
     public void requestLogData(LogData data, final VolleyCallback callback) {
         String url = makeURL();
 
-//        HttpOption option = httpOptionSetting(data);
         JSONObject jsonObject = makeJSON(data);
 
         JsonObjectRequest request = new JsonObjectRequest(
@@ -90,38 +89,12 @@ public class HttpService implements ServiceInterface {
                     }
                 });
 
-//        VolleyCustomRequest request = new VolleyCustomRequest(
-//                Request.Method.POST,
-//                url,
-//                option,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        Log.i("Response", "success");
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        Log.e("VolleyError", "error");
-//                    }
-//                });
-
-
         request.setRetryPolicy(new DefaultRetryPolicy(2000, 5, 1));
 
         addRequestQueue(request);
     }
 
     private void addRequestQueue(JsonObjectRequest request) {
-        try {
-            VolleyManager.getInstance().getRequestQueue().add(request);
-        } catch (IllegalAccessException e) {
-            Log.i("IllegalAccessException", e.getMessage());
-        }
-    }
-
-    private void addRequestQueue(VolleyCustomRequest request) {
         try {
             VolleyManager.getInstance().getRequestQueue().add(request);
         } catch (IllegalAccessException e) {

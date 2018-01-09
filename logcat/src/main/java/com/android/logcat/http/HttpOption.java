@@ -49,7 +49,7 @@ public class HttpOption {
         setParams("message", message);
     }
 
-    public void setTime(long time) {
+    public void setTime(String time) {
         setParams("time", String.valueOf(time));
     }
 
