@@ -35,7 +35,7 @@ public class VolleyCustomRequest extends Request<String> {
         if (option.getBodyContentType() != null) {
             return option.getBodyContentType();
         }
-        return "application/x-www-form-urlencoded; charset=utf-8";
+        return "application/x-www-form-urlencoded";
     }
 
     @Override

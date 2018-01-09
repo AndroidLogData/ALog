@@ -13,7 +13,7 @@ public class HttpService implements ServiceInterface {
     private String makeURL() {
         Uri uri = new Uri.Builder()
                 .scheme("http")
-                .encodedAuthority("192.168.0.7:8080")
+                .encodedAuthority("52.231.37.113:8080")
                 .path("logdata")
                 .build();
         Log.i("URL", uri.toString());
@@ -23,7 +23,7 @@ public class HttpService implements ServiceInterface {
     private HttpOption httpOptionSetting(LogData data) {
         HttpOption option = new HttpOption();
 
-        option.setBodyContentType("application/x-www-form-urlencoded; charset=utf-8");
+        option.setBodyContentType("application/x-www-form-urlencoded");
         option.setLogLevel(data.getLevel());
         option.setTag(data.getTag());
         option.setLogMessage(data.getMsg());
