@@ -4,48 +4,40 @@ import android.net.Uri;
 import android.util.Log;
 
 import com.android.logcat.util.LogData;
+import com.android.logcat.util.TransferType;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+import org.acra.ReportField;
+import org.acra.data.CrashReportData;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class HttpService implements ServiceInterface {
-    private String makeURL() {
-        Uri uri = new Uri.Builder()
-                .scheme("http")
-                .encodedAuthority("52.231.37.113:8080")
-                .path("logdata")
-                .build();
-        Log.i("URL", uri.toString());
-        return uri.toString();
+    private String makeURL(TransferType type) {
+        Uri.Builder uri = new Uri.Builder();
+        uri.scheme("http");
+        uri.encodedAuthority("52.231.37.113:8080");
+//        uri.encodedAuthority("192.168.0.7:8080");
+
+        switch (type) {
+            case CRASH:
+                uri.path("crash");
+                break;
+            case LOG_DATA:
+                uri.path("logdata");
+                break;
+            default:
+                break;
+        }
+
+        return uri.build().toString();
     }
 
-    private HttpOption httpOptionSetting(LogData data) {
-        HttpOption option = new HttpOption();
-
-        option.setContentType("application/x-www-form-urlencoded");
-        option.setAcceptEncoding("gzip, deflate");
-        option.setLogLevel(data.getLevel());
-        option.setTag(data.getTag());
-        option.setLogMessage(data.getMsg());
-        option.setTime(data.getTime());
-        option.setAvailMemory(data.getAvailMemory());
-        option.setTotalMemory(data.getTotalMemory());
-        option.setMemoryPercentage(data.getMemoryPercentage());
-        option.setLowMemory(data.isLowMemory());
-        option.setThreshold(data.getThreshold());
-        option.setDalvikPss(data.getDalvikPss());
-        option.setOtherPss(data.getOtherPss());
-        option.setNativePss(data.getNativePss());
-
-        return option;
-    }
-
-    private JSONObject makeJSON(LogData data) {
+    private JSONObject makeLogDataJSON(LogData data) {
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("message", data.getMsg());
@@ -67,10 +59,61 @@ public class HttpService implements ServiceInterface {
         return null;
     }
 
-    public void requestLogData(LogData data, final VolleyCallback callback) {
-        String url = makeURL();
+    private JSONObject makeCrashDataJSON(CrashReportData report) {
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("AndroidVersion", report.getString(ReportField.ANDROID_VERSION));
+            jsonObject.put("APPVersionCode", report.getString(ReportField.APP_VERSION_CODE));
+            jsonObject.put("APPVersionName", report.getString(ReportField.APP_VERSION_NAME));
+            jsonObject.put("AvailableMemorySize", report.getString(ReportField.AVAILABLE_MEM_SIZE));
+            jsonObject.put("Brand", report.getString(ReportField.BRAND));
+            jsonObject.put("Build", report.getString(ReportField.BUILD));
+            jsonObject.put("DeviceID", report.getString(ReportField.DEVICE_ID));
+            jsonObject.put("Display", report.getString(ReportField.DISPLAY));
+            jsonObject.put("DeviceFeatures", report.getString(ReportField.DEVICE_FEATURES));
+            jsonObject.put("Environment", report.getString(ReportField.ENVIRONMENT));
+            jsonObject.put("PackageName", report.getString(ReportField.PACKAGE_NAME));
+            jsonObject.put("TotalMemorySize", report.getString(ReportField.TOTAL_MEM_SIZE));
+            jsonObject.put("ApplicationLog", report.getString(ReportField.APPLICATION_LOG));
+            jsonObject.put("Logcat", report.getString(ReportField.LOGCAT));
+            return jsonObject;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-        JSONObject jsonObject = makeJSON(data);
+    public void requestCrashData(CrashReportData report, final VolleyCallback callback) {
+        String url = makeURL(TransferType.CRASH);
+
+        JSONObject jsonObject = makeCrashDataJSON(report);
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                jsonObject,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i("Response", "Crash Transfer Success");
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("VolleyError", "Crash Transfer Error");
+                    }
+                });
+
+        request.setRetryPolicy(new DefaultRetryPolicy(2000, 5, 1));
+
+        addRequestQueue(request);
+    }
+
+    public void requestLogData(LogData data, final VolleyCallback callback) {
+        String url = makeURL(TransferType.LOG_DATA);
+
+        JSONObject jsonObject = makeLogDataJSON(data);
 
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.POST,
