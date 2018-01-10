@@ -79,13 +79,13 @@ public class HttpService implements ServiceInterface {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.i("Response", "success");
+                        Log.i("Response", "Log Transfer Success");
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("VolleyError", "error");
+                        Log.e("VolleyError", "Log Transfer Error");
                     }
                 });
 

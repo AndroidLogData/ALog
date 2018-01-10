@@ -19,52 +19,29 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 
-public class Logcat {
-    private Context context;
-    private boolean showLog;
-    private boolean logTransfer;
-    private boolean debug;
-    private LogData data;
-    private MemoryChecker memoryChecker;
+public final class Logcat {
+    private static boolean showLog;
+    private static boolean logTransfer;
+    private static boolean debug;
+    private static LogData data;
+    private static MemoryChecker memoryChecker;
 
-    public static class Builder {
-        // 필수 인자
-        private Context context;
-        private boolean showLog;
-        private boolean logTransfer;
-        // 선택적 인자
-        private boolean debug;
-        // 그 외
-        private LogData data;
-        private MemoryChecker memoryChecker;
+    private Logcat() {
 
-        public Builder(Context context, boolean showLog, boolean logTransfer) {
-            this.showLog = showLog;
-            this.context = context;
-            this.logTransfer = logTransfer;
-            this.data = new LogData();
-            this.memoryChecker = new MemoryChecker(context);
-            HttpServiceProvider.registerDefaultProvider(new ProviderImplement());
-            VolleyManager.getInstance().setRequestQueue(context);
-        }
-
-        public Builder setDebug(boolean value) {
-            debug = value;
-            return this;
-        }
-
-        public Logcat build() {
-            return new Logcat(this);
-        }
     }
 
-    private Logcat(Builder builder) {
-        debug = builder.debug;
-        logTransfer = builder.logTransfer;
-        data = builder.data;
-        showLog = builder.showLog;
-        context = builder.context;
-        memoryChecker = builder.memoryChecker;
+    public static void logSetting(Context context, boolean showLog, boolean logTransfer) {
+        HttpServiceProvider.registerDefaultProvider(new ProviderImplement());
+        VolleyManager.getInstance().setRequestQueue(context);
+        memoryChecker = new MemoryChecker(context);
+
+        Logcat.showLog = showLog;
+        Logcat.logTransfer = logTransfer;
+        Logcat.data = new LogData();
+    }
+
+    public static void setDebug(boolean debug) {
+        Logcat.debug = debug;
     }
 
     /**
@@ -73,7 +50,7 @@ public class Logcat {
      *
      * @param msg
      */
-    public void v(String msg) {
+    public static void v(String msg) {
         if (showLog) {
             Log.v(buildLogTag(), msg);
         }
@@ -93,7 +70,7 @@ public class Logcat {
      *
      * @param msg
      */
-    public void d(String msg) {
+    public static void d(String msg) {
         if (showLog) {
             Log.d(buildLogTag(), msg);
         }
@@ -113,7 +90,7 @@ public class Logcat {
      *
      * @param msg
      */
-    public void i(String msg) {
+    public static void i(String msg) {
         if (showLog) {
             Log.i(buildLogTag(), msg);
         }
@@ -133,7 +110,7 @@ public class Logcat {
      *
      * @param msg
      */
-    public void w(String msg) {
+    public static void w(String msg) {
         if (showLog) {
             Log.w(buildLogTag(), msg);
         }
@@ -153,7 +130,7 @@ public class Logcat {
      *
      * @param msg
      */
-    public void e(String msg) {
+    public static void e(String msg) {
         if (showLog) {
             Log.e(buildLogTag(), msg);
         }
@@ -167,7 +144,7 @@ public class Logcat {
         }
     }
 
-    private String getTime() {
+    private static String getTime() {
         DateTime date = DateTime.now();
         DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
 
@@ -178,7 +155,7 @@ public class Logcat {
         return memoryChecker.getMemoryPercentage();
     }
 
-    private void debugMode(LogData data) {
+    private static void debugMode(LogData data) {
         data.setTotalMemory(memoryChecker.getTotalMemory());
         data.setAvailMemory(memoryChecker.getAvailableMemory());
         data.setLowMemory(memoryChecker.getLowMemory());
@@ -190,8 +167,8 @@ public class Logcat {
         data.setTotalPss(memoryChecker.getTotalPss());
     }
 
-    private StringBuilder buildLog() {
-        StackTraceElement ste = Thread.currentThread().getStackTrace()[2];
+    private static StringBuilder buildLog() {
+        StackTraceElement ste = Thread.currentThread().getStackTrace()[5];
 
         StringBuilder sb = new StringBuilder();
 
@@ -204,11 +181,11 @@ public class Logcat {
         return sb;
     }
 
-    private String buildLogTag() {
+    private static String buildLogTag() {
         return buildLog().toString();
     }
 
-    private void logDataTransfer(LogData data) {
+    private static void logDataTransfer(LogData data) {
         if (debug) {
             debugMode(data);
         }
