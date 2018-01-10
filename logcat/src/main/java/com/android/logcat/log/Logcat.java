@@ -13,10 +13,7 @@ import com.android.logcat.http.VolleyCallback;
 import com.android.logcat.http.VolleyManager;
 import com.android.logcat.memory.MemoryChecker;
 import com.android.logcat.util.LogData;
-
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+import com.android.logcat.util.Utility;
 
 
 public final class Logcat {
@@ -59,7 +56,7 @@ public final class Logcat {
             data.setLevel("v");
             data.setTag(buildLogTag());
             data.setMsg(msg);
-            data.setTime(getTime());
+            data.setTime(Utility.getTime());
             logDataTransfer(data);
         }
     }
@@ -79,7 +76,7 @@ public final class Logcat {
             data.setLevel("d");
             data.setTag(buildLogTag());
             data.setMsg(msg);
-            data.setTime(getTime());
+            data.setTime(Utility.getTime());
             logDataTransfer(data);
         }
     }
@@ -99,7 +96,7 @@ public final class Logcat {
             data.setLevel("i");
             data.setTag(buildLogTag());
             data.setMsg(msg);
-            data.setTime(getTime());
+            data.setTime(Utility.getTime());
             logDataTransfer(data);
         }
     }
@@ -119,7 +116,7 @@ public final class Logcat {
             data.setLevel("w");
             data.setTag(buildLogTag());
             data.setMsg(msg);
-            data.setTime(getTime());
+            data.setTime(Utility.getTime());
             logDataTransfer(data);
         }
     }
@@ -139,16 +136,9 @@ public final class Logcat {
             data.setLevel("e");
             data.setTag(buildLogTag());
             data.setMsg(msg);
-            data.setTime(getTime());
+            data.setTime(Utility.getTime());
             logDataTransfer(data);
         }
-    }
-
-    private static String getTime() {
-        DateTime date = DateTime.now();
-        DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
-
-        return date.toString(fmt);
     }
 
     private double getMemory() {

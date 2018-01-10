@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.android.logcat.util.LogData;
 import com.android.logcat.util.TransferType;
+import com.android.logcat.util.Utility;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -76,6 +77,7 @@ public class HttpService implements ServiceInterface {
             jsonObject.put("TotalMemorySize", report.getString(ReportField.TOTAL_MEM_SIZE));
             jsonObject.put("ApplicationLog", report.getString(ReportField.APPLICATION_LOG));
             jsonObject.put("Logcat", report.getString(ReportField.LOGCAT));
+            jsonObject.put("Time", Utility.getTime());
             return jsonObject;
         } catch (JSONException e) {
             e.printStackTrace();
