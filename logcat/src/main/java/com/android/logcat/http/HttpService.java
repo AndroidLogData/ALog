@@ -51,6 +51,7 @@ public class HttpService implements ServiceInterface {
             jsonObject.put("threshold", data.getThreshold());
             jsonObject.put("lowMemory", data.isLowMemory());
             jsonObject.put("dalvikPss", data.getDalvikPss());
+            jsonObject.put("nativePss", data.getNativePss());
             jsonObject.put("otherPss", data.getOtherPss());
             jsonObject.put("totalPss", data.getTotalPss());
             return jsonObject;
