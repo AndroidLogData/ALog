@@ -99,7 +99,11 @@ public class HttpService implements ServiceInterface {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.i("Response", "Crash Transfer Success");
+                        try {
+                            Log.i("Response", response.get("result").toString());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -126,7 +130,11 @@ public class HttpService implements ServiceInterface {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.i("Response", "Log Transfer Success");
+                        try {
+                            Log.i("Response", response.get("result").toString());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
