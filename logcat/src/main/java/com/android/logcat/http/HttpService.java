@@ -41,6 +41,7 @@ public class HttpService implements ServiceInterface {
     private JSONObject makeLogDataJSON(LogData data) {
         try {
             JSONObject jsonObject = new JSONObject();
+            jsonObject.put("packageName", data.getPackageName());
             jsonObject.put("message", data.getMsg());
             jsonObject.put("tag", data.getTag());
             jsonObject.put("level", data.getLevel());

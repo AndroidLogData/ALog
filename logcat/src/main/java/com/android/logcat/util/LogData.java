@@ -5,6 +5,7 @@ package com.android.logcat.util;
  */
 
 public class LogData {
+    private String packageName;
     private String msg;
     private String tag;
     private String level;
@@ -18,6 +19,14 @@ public class LogData {
     private int nativePss;
     private int otherPss;
     private int totalPss;
+
+    public String getPackageName() {
+        return packageName;
+    }
+
+    public void setPackageName(String packageName) {
+        this.packageName = packageName;
+    }
 
     public String getMsg() {
         return msg;

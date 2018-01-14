@@ -8,6 +8,10 @@ import com.android.logcat.log.Logcat;
 
 public class Practice {
     public void pracitce() {
-        Logcat.i("Practice Class");
+        Logcat.i("practice info");
+        Logcat.e("practice error");
+        Logcat.d("practice debug");
+        Logcat.w("practice warning");
+        Logcat.v("practice verb");
     }
 }

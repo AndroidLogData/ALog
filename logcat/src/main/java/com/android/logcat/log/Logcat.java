@@ -17,6 +17,7 @@ import com.android.logcat.util.Utility;
 
 
 public final class Logcat {
+    private static String packageName;
     private static boolean showLog;
     private static boolean logTransfer;
     private static boolean debug;
@@ -35,6 +36,7 @@ public final class Logcat {
         Logcat.showLog = showLog;
         Logcat.logTransfer = logTransfer;
         Logcat.data = new LogData();
+        Logcat.packageName = context.getPackageName();
     }
 
     public static void setDebug(boolean debug) {
@@ -53,6 +55,7 @@ public final class Logcat {
         }
 
         if (logTransfer) {
+            data.setPackageName(packageName);
             data.setLevel("v");
             data.setTag(buildLogTag());
             data.setMsg(msg);
@@ -73,6 +76,7 @@ public final class Logcat {
         }
 
         if (logTransfer) {
+            data.setPackageName(packageName);
             data.setLevel("d");
             data.setTag(buildLogTag());
             data.setMsg(msg);
@@ -93,6 +97,7 @@ public final class Logcat {
         }
 
         if (logTransfer) {
+            data.setPackageName(packageName);
             data.setLevel("i");
             data.setTag(buildLogTag());
             data.setMsg(msg);
@@ -113,6 +118,7 @@ public final class Logcat {
         }
 
         if (logTransfer) {
+            data.setPackageName(packageName);
             data.setLevel("w");
             data.setTag(buildLogTag());
             data.setMsg(msg);
@@ -133,6 +139,7 @@ public final class Logcat {
         }
 
         if (logTransfer) {
+            data.setPackageName(packageName);
             data.setLevel("e");
             data.setTag(buildLogTag());
             data.setMsg(msg);
