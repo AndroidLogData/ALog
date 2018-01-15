@@ -8,18 +8,18 @@
 * build.gradle에 추가
 ```gradle
 allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
-	}
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
 ```
 
 * dependencies 추가
 ```gradle
 dependencies {
-	        compile 'com.github.AndroidLogData:Logdata-Android:0.1.2'
-	}
+    compile 'com.github.AndroidLogData:Logdata-Android:0.1.2'
+}
 ```
 
 ## Development Stack
