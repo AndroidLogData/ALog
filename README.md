@@ -22,6 +22,29 @@ dependencies {
 }
 ```
 
+## 사용법
+```java
+public class MainActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        /**
+        * setting
+        * Logcat을 사용하기 전에 해야할 설정
+        *
+        * @param Android Context
+        * @param Logcat에서 로그를 보기위한 설정
+        * @param 서버로 로그 데이터를 보내기 위한 설정
+        */
+        Logcat.logSetting(getApplicationContext(), true, true);
+        // 서버로 메모리 데이터도 같이 전송
+        Logcat.setDebug(true);
+    }
+}
+```
+
 ## Development Stack
 * Language : Java
 * Framework : Android
