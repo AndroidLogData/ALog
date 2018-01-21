@@ -13,7 +13,6 @@ import com.android.logcat.http.VolleyCallback;
 import com.android.logcat.http.VolleyManager;
 import com.android.logcat.memory.MemoryChecker;
 import com.android.logcat.util.LogData;
-import com.android.logcat.util.Utility;
 
 
 public final class Logcat {
@@ -59,7 +58,7 @@ public final class Logcat {
             data.setLevel("v");
             data.setTag(buildLogTag());
             data.setMsg(msg);
-            data.setTime(Utility.getTime());
+            data.setTime(System.currentTimeMillis());
             logDataTransfer(data);
         }
     }
@@ -80,7 +79,7 @@ public final class Logcat {
             data.setLevel("d");
             data.setTag(buildLogTag());
             data.setMsg(msg);
-            data.setTime(Utility.getTime());
+            data.setTime(System.currentTimeMillis());
             logDataTransfer(data);
         }
     }
@@ -101,7 +100,7 @@ public final class Logcat {
             data.setLevel("i");
             data.setTag(buildLogTag());
             data.setMsg(msg);
-            data.setTime(Utility.getTime());
+            data.setTime(System.currentTimeMillis());
             logDataTransfer(data);
         }
     }
@@ -122,7 +121,7 @@ public final class Logcat {
             data.setLevel("w");
             data.setTag(buildLogTag());
             data.setMsg(msg);
-            data.setTime(Utility.getTime());
+            data.setTime(System.currentTimeMillis());
             logDataTransfer(data);
         }
     }
@@ -143,7 +142,7 @@ public final class Logcat {
             data.setLevel("e");
             data.setTag(buildLogTag());
             data.setMsg(msg);
-            data.setTime(Utility.getTime());
+            data.setTime(System.currentTimeMillis());
             logDataTransfer(data);
         }
     }

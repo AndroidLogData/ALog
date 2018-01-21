@@ -9,7 +9,7 @@ public class LogData {
     private String msg;
     private String tag;
     private String level;
-    private String time;
+    private long time;
     private long totalMemory;
     private long availMemory;
     private double memoryPercentage;
@@ -52,11 +52,11 @@ public class LogData {
         this.level = level;
     }
 
-    public String getTime() {
+    public long getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(long time) {
         this.time = time;
     }
 
