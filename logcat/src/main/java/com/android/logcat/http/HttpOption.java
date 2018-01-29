@@ -41,54 +41,6 @@ public class HttpOption {
         this.bodyContentType = bodyContentType;
     }
 
-    public void setLogLevel(String level) {
-        setParams("level", level);
-    }
-
-    public void setLogMessage(String message) {
-        setParams("message", message);
-    }
-
-    public void setTime(String time) {
-        setParams("time", String.valueOf(time));
-    }
-
-    public void setTotalMemory(long totalMemory) {
-        setParams("totalMemory", String.valueOf(totalMemory));
-    }
-
-    public void setAvailMemory(long availMemory) {
-        setParams("availMemory", String.valueOf(availMemory));
-    }
-
-    public void setMemoryPercentage(double percentage) {
-        setParams("memoryPercentage", String.valueOf(percentage));
-    }
-
-    public void setThreshold(long threshold) {
-        setParams("threshold", String.valueOf(threshold));
-    }
-
-    public void setLowMemory(boolean lowMemory) {
-        setParams("lowMemory", String.valueOf(lowMemory));
-    }
-
-    public void setTag(String tag) {
-        setParams("tag", tag);
-    }
-
-    public void setDalvikPss(int dalvikPss) {
-        setParams("dalvikPss", String.valueOf(dalvikPss));
-    }
-
-    public void setOtherPss(int otherPss) {
-        setParams("dalvikPss", String.valueOf(otherPss));
-    }
-
-    public void setNativePss(int nativePss) {
-        setParams("dalvikPss", String.valueOf(nativePss));
-    }
-
     public void setContentType(String value) {
         setHeaders("Content-Type", value);
     }
