@@ -2,6 +2,8 @@ package com.android.logdata.logdata_android;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 
 import com.android.logcat.log.Logcat;
 
@@ -26,8 +28,14 @@ public class MainActivity extends AppCompatActivity {
         Logcat.w("warning");
         Logcat.v("verb");
 
-
-//        TextView textView = null;
-//        textView.setText("Hello, World!");
+        Button btn = (Button) findViewById(R.id.main_btn);
+        btn.setOnClickListener(listener);
     }
+
+    Button.OnClickListener listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            throw new NullPointerException();
+        }
+    };
 }

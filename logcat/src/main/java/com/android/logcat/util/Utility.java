@@ -15,4 +15,11 @@ public class Utility {
 
         return date.toString(fmt);
     }
+
+    public static boolean checkedNull(Object o) {
+        if (o == null) {
+            return true;
+        }
+        return false;
+    }
 }
