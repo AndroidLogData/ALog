@@ -5,6 +5,9 @@ package com.android.logcat.log;
  */
 
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.android.logcat.http.HttpServiceProvider;
@@ -12,7 +15,9 @@ import com.android.logcat.http.ProviderImplement;
 import com.android.logcat.http.VolleyCallback;
 import com.android.logcat.http.VolleyManager;
 import com.android.logcat.memory.MemoryChecker;
-import com.android.logcat.util.LogData;
+import com.android.logcat.vo.LogVO;
+import com.android.logcat.vo.MemoryVO;
+import com.android.logcat.util.Utility;
 
 
 public final class Logcat {
@@ -20,26 +25,51 @@ public final class Logcat {
     private static boolean showLog;
     private static boolean logTransfer;
     private static boolean debug;
-    private static LogData data;
+    private static LogVO data;
     private static MemoryChecker memoryChecker;
+    private static String apiKey;
 
-    private Logcat() {
-
+    private Logcat() throws IllegalAccessException {
+        throw new IllegalAccessException("Access Denied");
     }
 
     public static void logSetting(Context context, boolean showLog, boolean logTransfer) {
+        if (Utility.checkedNull(context)) {
+            throw new IllegalArgumentException("Need Context");
+        }
+
         HttpServiceProvider.registerDefaultProvider(new ProviderImplement());
         VolleyManager.getInstance().setRequestQueue(context);
         memoryChecker = new MemoryChecker(context);
+        setApiKey(context);
 
         Logcat.showLog = showLog;
         Logcat.logTransfer = logTransfer;
-        Logcat.data = new LogData();
+        Logcat.data = new LogVO();
         Logcat.packageName = context.getPackageName();
     }
 
     public static void setDebug(boolean debug) {
         Logcat.debug = debug;
+    }
+
+    private static void setApiKey(Context context) {
+        apiKey = null;
+
+        try {
+            String e = context.getPackageName();
+            ApplicationInfo ai = context
+                    .getPackageManager()
+                    .getApplicationInfo(e, PackageManager.GET_META_DATA);
+            Bundle bundle = ai.metaData;
+            if(bundle != null) {
+                apiKey = bundle.getString("com.logcat.apiKey");
+            }
+        } catch (Exception var6) {
+            Log.d("setApiKey", "Caught non-fatal exception while retrieving apiKey: " + var6);
+        }
+
+        Log.i("setApiKey", apiKey);
     }
 
     /**
@@ -147,20 +177,19 @@ public final class Logcat {
         }
     }
 
-    private double getMemory() {
-        return memoryChecker.getMemoryPercentage();
-    }
-
-    private static void debugMode(LogData data) {
-        data.setTotalMemory(memoryChecker.getTotalMemory());
-        data.setAvailMemory(memoryChecker.getAvailableMemory());
-        data.setLowMemory(memoryChecker.getLowMemory());
-        data.setMemoryPercentage(memoryChecker.getMemoryPercentage());
-        data.setThreshold(memoryChecker.getThreshold());
-        data.setDalvikPss(memoryChecker.getDalvikPss());
-        data.setNativePss(memoryChecker.getNativePss());
-        data.setOtherPss(memoryChecker.getOtherPss());
-        data.setTotalPss(memoryChecker.getTotalPss());
+    private static MemoryVO debugMode() {
+        MemoryVO memory = new MemoryVO(
+                memoryChecker.getTotalMemory(),
+                memoryChecker.getAvailableMemory(),
+                memoryChecker.getMemoryPercentage(),
+                memoryChecker.getThreshold(),
+                memoryChecker.getLowMemory(),
+                memoryChecker.getDalvikPss(),
+                memoryChecker.getNativePss(),
+                memoryChecker.getOtherPss(),
+                memoryChecker.getTotalPss()
+        );
+        return memory;
     }
 
     private static StringBuilder buildLog() {
@@ -181,12 +210,13 @@ public final class Logcat {
         return buildLog().toString();
     }
 
-    private static void logDataTransfer(LogData data) {
+    private static void logDataTransfer(LogVO data) {
         if (debug) {
-            debugMode(data);
+            data.setMemory(debugMode());
         }
 
         HttpServiceProvider.newInstance().requestLogData(
+                apiKey,
                 data,
                 new VolleyCallback() {
                     @Override

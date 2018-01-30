@@ -1,15 +1,10 @@
-package com.android.logcat.util;
+package com.android.logcat.vo;
 
 /**
- * Created by Null on 2018-01-01.
+ * Created by Null on 2018-01-30.
  */
 
-public class LogData {
-    private String packageName;
-    private String msg;
-    private String tag;
-    private String level;
-    private long time;
+public class MemoryVO {
     private long totalMemory;
     private long availMemory;
     private double memoryPercentage;
@@ -20,44 +15,16 @@ public class LogData {
     private int otherPss;
     private int totalPss;
 
-    public String getPackageName() {
-        return packageName;
-    }
-
-    public void setPackageName(String packageName) {
-        this.packageName = packageName;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public String getTag() {
-        return tag;
-    }
-
-    public void setTag(String tag) {
-        this.tag = tag;
-    }
-
-    public String getLevel() {
-        return level;
-    }
-
-    public void setLevel(String level) {
-        this.level = level;
-    }
-
-    public long getTime() {
-        return time;
-    }
-
-    public void setTime(long time) {
-        this.time = time;
+    public MemoryVO(long totalMemory, long availMemory, double memoryPercentage, long threshold, boolean lowMemory, int dalvikPss, int nativePss, int otherPss, int totalPss) {
+        this.totalMemory = totalMemory;
+        this.availMemory = availMemory;
+        this.memoryPercentage = memoryPercentage;
+        this.threshold = threshold;
+        this.lowMemory = lowMemory;
+        this.dalvikPss = dalvikPss;
+        this.nativePss = nativePss;
+        this.otherPss = otherPss;
+        this.totalPss = totalPss;
     }
 
     public long getTotalMemory() {
@@ -132,11 +99,16 @@ public class LogData {
         this.totalPss = totalPss;
     }
 
-    @Override
-    public String toString() {
-        return "LogLevel : " + getLevel() + "\n" +
-                "Time : " + getTime() + "\n" +
-                "Tag : " + getTag() + "\n" +
-                "Message : " + getMsg() + "\n";
-    }
+//    @Override
+//    public String toString() {
+//        return "Total Memory : " + getTotalMemory() + "\n" +
+//                "Avail Memory : " + getAvailMemory() + "\n" +
+//                "Memory Percentage : " + getMemoryPercentage() + "\n" +
+//                "Threshold : " + getThreshold() + "\n" +
+//                "Low Memory : " + isLowMemory() + "\n" +
+//                "Dalvik Pss : " + getDalvikPss() + "\n" +
+//                "Native Pss : " + getNativePss() + "\n" +
+//                "Other Pss : " + getOtherPss() + "\n" +
+//                "Total Pss : " + getTotalPss() + "\n";
+//    }
 }

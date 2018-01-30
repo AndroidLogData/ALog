@@ -3,7 +3,7 @@ package com.android.logcat.http;
 import android.net.Uri;
 import android.util.Log;
 
-import com.android.logcat.util.LogData;
+import com.android.logcat.vo.LogVO;
 import com.android.logcat.util.TransferType;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -36,23 +36,28 @@ public class HttpService implements ServiceInterface {
         return uri.build().toString();
     }
 
-    private JSONObject makeLogDataJSON(LogData data) {
+    private JSONObject makeLogDataJSON(LogVO data) {
         try {
             JSONObject jsonObject = new JSONObject();
+            JSONObject memoryInfo = new JSONObject();
+
             jsonObject.put("packageName", data.getPackageName());
             jsonObject.put("message", data.getMsg());
             jsonObject.put("tag", data.getTag());
             jsonObject.put("level", data.getLevel());
             jsonObject.put("time", data.getTime());
-            jsonObject.put("totalMemory", data.getTotalMemory());
-            jsonObject.put("availMemory", data.getAvailMemory());
-            jsonObject.put("memoryPercentage", data.getMemoryPercentage());
-            jsonObject.put("threshold", data.getThreshold());
-            jsonObject.put("lowMemory", data.isLowMemory());
-            jsonObject.put("dalvikPss", data.getDalvikPss());
-            jsonObject.put("nativePss", data.getNativePss());
-            jsonObject.put("otherPss", data.getOtherPss());
-            jsonObject.put("totalPss", data.getTotalPss());
+
+            memoryInfo.put("totalMemory", data.getMemory().getTotalMemory());
+            memoryInfo.put("availMemory", data.getMemory().getAvailMemory());
+            memoryInfo.put("memoryPercentage", data.getMemory().getMemoryPercentage());
+            memoryInfo.put("threshold", data.getMemory().getThreshold());
+            memoryInfo.put("lowMemory", data.getMemory().isLowMemory());
+            memoryInfo.put("dalvikPss", data.getMemory().getDalvikPss());
+            memoryInfo.put("nativePss", data.getMemory().getNativePss());
+            memoryInfo.put("otherPss", data.getMemory().getOtherPss());
+            memoryInfo.put("totalPss", data.getMemory().getTotalPss());
+
+            jsonObject.put("memoryInfo", memoryInfo);
             return jsonObject;
         } catch (JSONException e) {
             e.printStackTrace();
@@ -86,30 +91,20 @@ public class HttpService implements ServiceInterface {
         return null;
     }
 
-    private HttpOption httpOptionSetting(LogData data) {
+    private HttpOption httpOptionSetting(String apiKey) {
         HttpOption option = new HttpOption();
 
         option.setBodyContentType("application/json");
         option.setContentType("application/json");
-        option.setSecretKey("1234asdf!@#$");
+        option.setSecretKey(apiKey);
 
         return option;
     }
 
-    private HttpOption httpOptionSetting() {
-        HttpOption option = new HttpOption();
-
-        option.setBodyContentType("application/json");
-        option.setContentType("application/json");
-        option.setSecretKey("1234asdf!@#$");
-
-        return option;
-    }
-
-    public void requestCrashData(CrashReportData report, final VolleyCallback callback) {
+    public void requestCrashData(String apiKey, CrashReportData report, final VolleyCallback callback) {
         String url = makeURL(TransferType.CRASH);
 
-        HttpOption option = httpOptionSetting();
+        HttpOption option = httpOptionSetting(apiKey);
         JSONObject jsonObject = makeCrashDataJSON(report);
 
         JsonCustomRequest request = new JsonCustomRequest(
@@ -139,10 +134,10 @@ public class HttpService implements ServiceInterface {
         addRequestQueue(request);
     }
 
-    public void requestLogData(LogData data, final VolleyCallback callback) {
+    public void requestLogData(String apiKey, LogVO data, final VolleyCallback callback) {
         String url = makeURL(TransferType.LOG_DATA);
 
-        HttpOption option = httpOptionSetting(data);
+        HttpOption option = httpOptionSetting(apiKey);
         JSONObject jsonObject = makeLogDataJSON(data);
 
         JsonCustomRequest request = new JsonCustomRequest(

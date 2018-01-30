@@ -1,6 +1,9 @@
 package com.android.logcat.crashlogger;
 
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.android.logcat.http.HttpServiceProvider;
@@ -17,22 +20,9 @@ import org.acra.sender.ReportSenderException;
 public class CrashReport implements ReportSender {
     @Override
     public void send(Context context, CrashReportData report) throws ReportSenderException {
-        // Iterate over the CrashReportData instance and do whatever
-        // you need with each pair of ReportField key / String value
-
-//        DisplayMetrics dm = context.getResources().getDisplayMetrics();
-//        PackageInfo pInfo = null;
-//        try {
-//            pInfo = context.getPackageManager().getPackageInfo(
-//                    context.getPackageName(), PackageManager.GET_META_DATA);
-//        } catch (PackageManager.NameNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//
-//        report.put("ScreenWidth", dm.widthPixels);
-//        report.put("ScreenHeight", dm.heightPixels);
-
+        String apiKey = setApiKey(context);
         HttpServiceProvider.newInstance().requestCrashData(
+                apiKey,
                 report,
                 new VolleyCallback() {
                     @Override
@@ -46,5 +36,24 @@ public class CrashReport implements ReportSender {
                     }
                 }
         );
+    }
+
+    private static String setApiKey(Context context) {
+        String apiKey = null;
+
+        try {
+            String e = context.getPackageName();
+            ApplicationInfo ai = context
+                    .getPackageManager()
+                    .getApplicationInfo(e, PackageManager.GET_META_DATA);
+            Bundle bundle = ai.metaData;
+            if (bundle != null) {
+                apiKey = bundle.getString("com.logcat.apiKey");
+                return apiKey;
+            }
+        } catch (Exception var6) {
+            Log.d("setApiKey", "Caught non-fatal exception while retrieving apiKey: " + var6);
+        }
+        return null;
     }
 }
