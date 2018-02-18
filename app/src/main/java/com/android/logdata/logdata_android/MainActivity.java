@@ -7,7 +7,10 @@ import android.widget.Button;
 
 import com.android.logcat.log.Logcat;
 
+import java.io.FileNotFoundException;
+
 public class MainActivity extends AppCompatActivity {
+    private Long[] longs = new Long[10000000];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,14 +31,62 @@ public class MainActivity extends AppCompatActivity {
         Logcat.w("warning");
         Logcat.v("verb");
 
-        Button btn = (Button) findViewById(R.id.main_btn);
-        btn.setOnClickListener(listener);
+        Button btn1 = (Button) findViewById(R.id.main_btn_1);
+        btn1.setOnClickListener(listener1);
+        Button btn2 = (Button) findViewById(R.id.main_btn_2);
+        btn2.setOnClickListener(listener2);
+        Button btn3 = (Button) findViewById(R.id.main_btn_3);
+        btn3.setOnClickListener(listener3);
+        Button btn4 = (Button) findViewById(R.id.main_btn_4);
+        btn4.setOnClickListener(listener4);
+        Button btn5 = (Button) findViewById(R.id.main_btn_5);
+        btn5.setOnClickListener(listener5);
+
+        for (int i = 0; i < longs.length; i++) {
+            longs[i] = 1L;
+        }
     }
 
-    Button.OnClickListener listener = new View.OnClickListener() {
+    Button.OnClickListener listener1 = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             throw new NullPointerException();
+        }
+    };
+
+    Button.OnClickListener listener2 = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            throw new IllegalArgumentException();
+        }
+    };
+
+    Button.OnClickListener listener3 = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+    };
+
+    Button.OnClickListener listener4 = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            try {
+                throw new ClassNotFoundException();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
+    Button.OnClickListener listener5 = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            try {
+                throw new FileNotFoundException();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         }
     };
 }

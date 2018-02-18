@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <meta-data android:name="com.logcat.apiKey"
-            android:value="defineApiKetInManifest"/>
+            android:value="ea0cc2e630ed4b6683252eb6114f89a9"/>
     </application>
 
 </manifest>
