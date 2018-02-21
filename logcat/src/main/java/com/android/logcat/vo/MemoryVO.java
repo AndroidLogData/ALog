@@ -27,6 +27,19 @@ public class MemoryVO {
         this.totalPss = totalPss;
     }
 
+    public MemoryVO(MemoryVO memoryVO) {
+        this(
+                memoryVO.totalMemory,
+                memoryVO.availMemory,
+                memoryVO.memoryPercentage,
+                memoryVO.threshold,
+                memoryVO.lowMemory,
+                memoryVO.dalvikPss,
+                memoryVO.nativePss,
+                memoryVO.otherPss,
+                memoryVO.totalPss);
+    }
+
     public long getTotalMemory() {
         return totalMemory;
     }

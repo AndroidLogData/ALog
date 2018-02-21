@@ -45,6 +45,12 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < longs.length; i++) {
             longs[i] = 1L;
         }
+
+        Logcat.i("memory info");
+        Logcat.e("memory error");
+        Logcat.d("memory debug");
+        Logcat.w("memory warning");
+        Logcat.v("memory verb");
     }
 
     Button.OnClickListener listener1 = new View.OnClickListener() {

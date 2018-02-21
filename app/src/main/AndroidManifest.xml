@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <meta-data android:name="com.logcat.apiKey"
-            android:value="ea0cc2e630ed4b6683252eb6114f89a9"/>
+            android:value="7aedf4b68be24cb2b918feb1c8bbf000"/>
     </application>
 
 </manifest>

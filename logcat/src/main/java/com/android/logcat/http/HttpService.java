@@ -19,8 +19,8 @@ public class HttpService implements ServiceInterface {
     private String makeURL(TransferType type) {
         Uri.Builder uri = new Uri.Builder();
         uri.scheme("http");
-//        uri.encodedAuthority("52.231.37.228:8080");
-        uri.encodedAuthority("192.168.0.7:8080");
+        uri.encodedAuthority("52.231.37.228:8080");
+//        uri.encodedAuthority("192.168.0.7:8080");
 
         switch (type) {
             case CRASH:

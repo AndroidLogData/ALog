@@ -62,7 +62,7 @@ public final class Logcat {
                     .getPackageManager()
                     .getApplicationInfo(e, PackageManager.GET_META_DATA);
             Bundle bundle = ai.metaData;
-            if(bundle != null) {
+            if (bundle != null) {
                 apiKey = bundle.getString("com.logcat.apiKey");
             }
         } catch (Exception var6) {
@@ -179,15 +179,7 @@ public final class Logcat {
 
     private static MemoryVO debugMode() {
         MemoryVO memory = new MemoryVO(
-                memoryChecker.getTotalMemory(),
-                memoryChecker.getAvailableMemory(),
-                memoryChecker.getMemoryPercentage(),
-                memoryChecker.getThreshold(),
-                memoryChecker.getLowMemory(),
-                memoryChecker.getDalvikPss(),
-                memoryChecker.getNativePss(),
-                memoryChecker.getOtherPss(),
-                memoryChecker.getTotalPss()
+                memoryChecker.getMemoryInfo()
         );
         return memory;
     }

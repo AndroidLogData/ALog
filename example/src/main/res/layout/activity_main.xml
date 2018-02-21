@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.android.logdata.example.MainActivity">
+
+    <Button
+        android:id="@+id/main_activity_one_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ActivityOne" />
+
+    <Button
+        android:id="@+id/main_activity_two_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ActivityTwo" />
+
+    <Button
+        android:id="@+id/main_null_exception_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="NullPointerException" />
+
+    <Button
+        android:id="@+id/main_array_index_exception_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ArrayIndexOutOfBoundsException" />
+
+    <Button
+        android:id="@+id/main_illegal_argument_exception_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="IllegalArgumentException" />
+
+    <Button
+        android:id="@+id/main_arithmetic_exception_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ArithmeticException" />
+
+    <Button
+        android:id="@+id/main_stack_overflow_error_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="StackOverflowError" />
+</LinearLayout>

@@ -1,1 +1,1 @@
-include ':app', ':logcat'
+include ':logcat', ':example'
