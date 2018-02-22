@@ -56,7 +56,7 @@ public class MemoryChecker {
                             // 사용가능한 메모리
                             activityMemoryInfo.availMem,
                             // 메모리 백분율
-                            100.0 * ((activityMemoryInfo.totalMem - activityMemoryInfo.availMem) / activityMemoryInfo.totalMem),
+                            100.0 * (((double) activityMemoryInfo.totalMem - (double) activityMemoryInfo.availMem) / (double) activityMemoryInfo.totalMem),
                             // 메모리 임계값
                             activityMemoryInfo.threshold,
                             // 메모리가 부족하다면 true

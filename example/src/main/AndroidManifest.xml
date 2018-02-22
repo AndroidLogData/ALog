@@ -21,7 +21,7 @@
 
         <meta-data
             android:name="com.logcat.apiKey"
-            android:value="7aedf4b68be24cb2b918feb1c8bbf000" />
+            android:value="f3204154588949489795196eaea96700" />
 
         <activity android:name=".ActivityOne" />
         <activity android:name=".ActivityTwo" />
