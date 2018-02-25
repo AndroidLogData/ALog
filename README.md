@@ -26,6 +26,8 @@ dependencies {
 ## 사용법
 * AndroidManifest.xml에 ```meta-data```추가
 ```xml
+<uses-permission android:name="android.permission.INTERNET" />
+...
 <meta-data android:name="com.logcat.apiKey"
 	android:value="<InsertYourKey>"/>
 ```
