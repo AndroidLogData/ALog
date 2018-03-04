@@ -15,9 +15,9 @@ import com.android.logcat.http.ProviderImplement;
 import com.android.logcat.http.VolleyCallback;
 import com.android.logcat.http.VolleyManager;
 import com.android.logcat.memory.MemoryChecker;
+import com.android.logcat.util.Utility;
 import com.android.logcat.vo.LogVO;
 import com.android.logcat.vo.MemoryVO;
-import com.android.logcat.util.Utility;
 
 
 public final class Logcat {
@@ -68,8 +68,6 @@ public final class Logcat {
         } catch (Exception var6) {
             Log.d("setApiKey", "Caught non-fatal exception while retrieving apiKey: " + var6);
         }
-
-        Log.i("setApiKey", apiKey);
     }
 
     /**
