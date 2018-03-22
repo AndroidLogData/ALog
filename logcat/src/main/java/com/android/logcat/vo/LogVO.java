@@ -6,7 +6,7 @@ package com.android.logcat.vo;
 
 public class LogVO {
     private String packageName;
-    private String msg;
+    private Object msg;
     private String tag;
     private String level;
     private long time;
@@ -20,11 +20,11 @@ public class LogVO {
         this.packageName = packageName;
     }
 
-    public String getMsg() {
+    public Object getMsg() {
         return msg;
     }
 
-    public void setMsg(String msg) {
+    public void setMsg(Object msg) {
         this.msg = msg;
     }
 

@@ -8,6 +8,9 @@ import android.widget.Button;
 
 import com.android.logcat.log.Logcat;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -18,11 +21,24 @@ public class MainActivity extends AppCompatActivity {
         Logcat.logSetting(getApplicationContext(), true, true);
         Logcat.setDebug(true);
 
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("name", "kim");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         Logcat.v("example");
         Logcat.i("example");
         Logcat.d("example");
         Logcat.w("example");
         Logcat.e("example");
+
+        Logcat.v(jsonObject);
+        Logcat.i(jsonObject);
+        Logcat.d(jsonObject);
+        Logcat.w(jsonObject);
+        Logcat.e(jsonObject);
 
         Button button1 = (Button) findViewById(R.id.main_activity_one_btn);
         Button button2 = (Button) findViewById(R.id.main_activity_two_btn);

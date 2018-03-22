@@ -15,9 +15,12 @@ import com.android.logcat.http.ProviderImplement;
 import com.android.logcat.http.VolleyCallback;
 import com.android.logcat.http.VolleyManager;
 import com.android.logcat.memory.MemoryChecker;
+import com.android.logcat.util.LogType;
 import com.android.logcat.util.Utility;
 import com.android.logcat.vo.LogVO;
 import com.android.logcat.vo.MemoryVO;
+
+import org.json.JSONObject;
 
 
 public final class Logcat {
@@ -83,7 +86,22 @@ public final class Logcat {
 
         if (logTransfer) {
             data.setPackageName(packageName);
-            data.setLevel("v");
+            data.setLevel(LogType.VERB.getValue());
+            data.setTag(buildLogTag());
+            data.setMsg(msg);
+            data.setTime(System.currentTimeMillis());
+            logDataTransfer(data);
+        }
+    }
+
+    public static void v(JSONObject msg) {
+        if (showLog) {
+            Log.v(buildLogTag(), msg.toString());
+        }
+
+        if (logTransfer) {
+            data.setPackageName(packageName);
+            data.setLevel(LogType.VERB.getValue());
             data.setTag(buildLogTag());
             data.setMsg(msg);
             data.setTime(System.currentTimeMillis());
@@ -104,7 +122,22 @@ public final class Logcat {
 
         if (logTransfer) {
             data.setPackageName(packageName);
-            data.setLevel("d");
+            data.setLevel(LogType.DEBUG.getValue());
+            data.setTag(buildLogTag());
+            data.setMsg(msg);
+            data.setTime(System.currentTimeMillis());
+            logDataTransfer(data);
+        }
+    }
+
+    public static void d(JSONObject msg) {
+        if (showLog) {
+            Log.d(buildLogTag(), msg.toString());
+        }
+
+        if (logTransfer) {
+            data.setPackageName(packageName);
+            data.setLevel(LogType.DEBUG.getValue());
             data.setTag(buildLogTag());
             data.setMsg(msg);
             data.setTime(System.currentTimeMillis());
@@ -125,7 +158,22 @@ public final class Logcat {
 
         if (logTransfer) {
             data.setPackageName(packageName);
-            data.setLevel("i");
+            data.setLevel(LogType.INFO.getValue());
+            data.setTag(buildLogTag());
+            data.setMsg(msg);
+            data.setTime(System.currentTimeMillis());
+            logDataTransfer(data);
+        }
+    }
+
+    public static void i(JSONObject msg) {
+        if (showLog) {
+            Log.i(buildLogTag(), msg.toString());
+        }
+
+        if (logTransfer) {
+            data.setPackageName(packageName);
+            data.setLevel(LogType.INFO.getValue());
             data.setTag(buildLogTag());
             data.setMsg(msg);
             data.setTime(System.currentTimeMillis());
@@ -146,7 +194,22 @@ public final class Logcat {
 
         if (logTransfer) {
             data.setPackageName(packageName);
-            data.setLevel("w");
+            data.setLevel(LogType.WARNING.getValue());
+            data.setTag(buildLogTag());
+            data.setMsg(msg);
+            data.setTime(System.currentTimeMillis());
+            logDataTransfer(data);
+        }
+    }
+
+    public static void w(JSONObject msg) {
+        if (showLog) {
+            Log.w(buildLogTag(), msg.toString());
+        }
+
+        if (logTransfer) {
+            data.setPackageName(packageName);
+            data.setLevel(LogType.WARNING.getValue());
             data.setTag(buildLogTag());
             data.setMsg(msg);
             data.setTime(System.currentTimeMillis());
@@ -167,7 +230,22 @@ public final class Logcat {
 
         if (logTransfer) {
             data.setPackageName(packageName);
-            data.setLevel("e");
+            data.setLevel(LogType.ERROR.getValue());
+            data.setTag(buildLogTag());
+            data.setMsg(msg);
+            data.setTime(System.currentTimeMillis());
+            logDataTransfer(data);
+        }
+    }
+
+    public static void e(JSONObject msg) {
+        if (showLog) {
+            Log.e(buildLogTag(), msg.toString());
+        }
+
+        if (logTransfer) {
+            data.setPackageName(packageName);
+            data.setLevel(LogType.ERROR.getValue());
             data.setTag(buildLogTag());
             data.setMsg(msg);
             data.setTime(System.currentTimeMillis());
@@ -176,10 +254,9 @@ public final class Logcat {
     }
 
     private static MemoryVO debugMode() {
-        MemoryVO memory = new MemoryVO(
+        return new MemoryVO(
                 memoryChecker.getMemoryInfo()
         );
-        return memory;
     }
 
     private static StringBuilder buildLog() {
