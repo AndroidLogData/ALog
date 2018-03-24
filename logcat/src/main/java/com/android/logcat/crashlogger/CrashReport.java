@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.android.logcat.http.HttpServiceProvider;
-import com.android.logcat.http.VolleyCallback;
+import com.android.logcat.http.HttpCallback;
 
 import org.acra.data.CrashReportData;
 import org.acra.sender.ReportSender;
@@ -24,7 +24,7 @@ public class CrashReport implements ReportSender {
         HttpServiceProvider.newInstance().requestCrashData(
                 apiKey,
                 report,
-                new VolleyCallback() {
+                new HttpCallback() {
                     @Override
                     public void onSuccess(Object result) {
                         Log.i("onSuccess", result.toString());

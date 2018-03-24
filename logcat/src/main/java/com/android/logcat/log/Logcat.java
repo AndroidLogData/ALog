@@ -11,8 +11,8 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.android.logcat.http.HttpServiceProvider;
-import com.android.logcat.http.ProviderImplement;
-import com.android.logcat.http.VolleyCallback;
+import com.android.logcat.http.CreateHttpServiceProvider;
+import com.android.logcat.http.HttpCallback;
 import com.android.logcat.http.VolleyManager;
 import com.android.logcat.memory.MemoryChecker;
 import com.android.logcat.util.LogType;
@@ -41,7 +41,7 @@ public final class Logcat {
             throw new IllegalArgumentException("Need Context");
         }
 
-        HttpServiceProvider.registerDefaultProvider(new ProviderImplement());
+        HttpServiceProvider.registerDefaultProvider(new CreateHttpServiceProvider());
         VolleyManager.getInstance().setRequestQueue(context);
         memoryChecker = new MemoryChecker(context);
         setApiKey(context);
@@ -375,7 +375,7 @@ public final class Logcat {
 
     public static void e(String msg, Throwable tr) {
         if (showLog) {
-            Log.e(buildLogTag(), msg);
+            Log.e(buildLogTag(), msg, tr);
         }
 
         if (logTransfer) {
@@ -390,7 +390,7 @@ public final class Logcat {
 
     public static void e(JSONObject msg, Throwable tr) {
         if (showLog) {
-            Log.e(buildLogTag(), msg.toString());
+            Log.e(buildLogTag(), msg.toString(), tr);
         }
 
         if (logTransfer) {
@@ -435,7 +435,7 @@ public final class Logcat {
         HttpServiceProvider.newInstance().requestLogData(
                 apiKey,
                 data,
-                new VolleyCallback() {
+                new HttpCallback() {
                     @Override
                     public void onSuccess(Object result) {
                         Log.i("onSuccess", result.toString());

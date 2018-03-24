@@ -3,7 +3,7 @@ package com.android.logcat.crashlogger;
 import android.app.Application;
 
 import com.android.logcat.http.HttpServiceProvider;
-import com.android.logcat.http.ProviderImplement;
+import com.android.logcat.http.CreateHttpServiceProvider;
 import com.android.logcat.http.VolleyManager;
 
 import org.acra.ACRA;
@@ -20,7 +20,7 @@ public class CreateAcra extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        HttpServiceProvider.registerDefaultProvider(new ProviderImplement());
+        HttpServiceProvider.registerDefaultProvider(new CreateHttpServiceProvider());
         VolleyManager.getInstance().setRequestQueue(getApplicationContext());
 
         ACRA.init(this);

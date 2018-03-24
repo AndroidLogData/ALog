@@ -15,7 +15,7 @@ import org.acra.data.CrashReportData;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class HttpService implements ServiceInterface {
+public class HttpService implements HttpServiceList {
     private String makeURL(TransferType type) {
         Uri.Builder uri = new Uri.Builder();
         uri.scheme("http");
@@ -101,7 +101,7 @@ public class HttpService implements ServiceInterface {
         return option;
     }
 
-    public void requestCrashData(String apiKey, CrashReportData report, final VolleyCallback callback) {
+    public void requestCrashData(String apiKey, CrashReportData report, final HttpCallback callback) {
         String url = makeURL(TransferType.CRASH);
 
         HttpOption option = httpOptionSetting(apiKey);
@@ -134,7 +134,7 @@ public class HttpService implements ServiceInterface {
         addRequestQueue(request);
     }
 
-    public void requestLogData(String apiKey, LogVO data, final VolleyCallback callback) {
+    public void requestLogData(String apiKey, LogVO data, final HttpCallback callback) {
         String url = makeURL(TransferType.LOG_DATA);
 
         HttpOption option = httpOptionSetting(apiKey);
