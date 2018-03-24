@@ -109,6 +109,36 @@ public final class Logcat {
         }
     }
 
+    public static void v(String msg, Throwable tr) {
+        if (showLog) {
+            Log.v(buildLogTag(), msg, tr);
+        }
+
+        if (logTransfer) {
+            data.setPackageName(packageName);
+            data.setLevel(LogType.VERB.getValue());
+            data.setTag(buildLogTag());
+            data.setMsg(msg);
+            data.setTime(System.currentTimeMillis());
+            logDataTransfer(data);
+        }
+    }
+
+    public static void v(JSONObject msg, Throwable tr) {
+        if (showLog) {
+            Log.v(buildLogTag(), msg.toString(), tr);
+        }
+
+        if (logTransfer) {
+            data.setPackageName(packageName);
+            data.setLevel(LogType.VERB.getValue());
+            data.setTag(buildLogTag());
+            data.setMsg(msg);
+            data.setTime(System.currentTimeMillis());
+            logDataTransfer(data);
+        }
+    }
+
     /**
      * debug
      * 디버깅 목적으로 문제가 있을만한 곳에 남기는 로그
@@ -133,6 +163,36 @@ public final class Logcat {
     public static void d(JSONObject msg) {
         if (showLog) {
             Log.d(buildLogTag(), msg.toString());
+        }
+
+        if (logTransfer) {
+            data.setPackageName(packageName);
+            data.setLevel(LogType.DEBUG.getValue());
+            data.setTag(buildLogTag());
+            data.setMsg(msg);
+            data.setTime(System.currentTimeMillis());
+            logDataTransfer(data);
+        }
+    }
+
+    public static void d(String msg, Throwable tr) {
+        if (showLog) {
+            Log.d(buildLogTag(), msg, tr);
+        }
+
+        if (logTransfer) {
+            data.setPackageName(packageName);
+            data.setLevel(LogType.DEBUG.getValue());
+            data.setTag(buildLogTag());
+            data.setMsg(msg);
+            data.setTime(System.currentTimeMillis());
+            logDataTransfer(data);
+        }
+    }
+
+    public static void d(JSONObject msg, Throwable tr) {
+        if (showLog) {
+            Log.d(buildLogTag(), msg.toString(), tr);
         }
 
         if (logTransfer) {
@@ -181,6 +241,36 @@ public final class Logcat {
         }
     }
 
+    public static void i(String msg, Throwable tr) {
+        if (showLog) {
+            Log.i(buildLogTag(), msg, tr);
+        }
+
+        if (logTransfer) {
+            data.setPackageName(packageName);
+            data.setLevel(LogType.INFO.getValue());
+            data.setTag(buildLogTag());
+            data.setMsg(msg);
+            data.setTime(System.currentTimeMillis());
+            logDataTransfer(data);
+        }
+    }
+
+    public static void i(JSONObject msg, Throwable tr) {
+        if (showLog) {
+            Log.i(buildLogTag(), msg.toString(), tr);
+        }
+
+        if (logTransfer) {
+            data.setPackageName(packageName);
+            data.setLevel(LogType.INFO.getValue());
+            data.setTag(buildLogTag());
+            data.setMsg(msg);
+            data.setTime(System.currentTimeMillis());
+            logDataTransfer(data);
+        }
+    }
+
     /**
      * warning
      * 지금은 문제가 되지않지만 나중에 문제가 될만한 정보를 남기는 로그
@@ -217,6 +307,36 @@ public final class Logcat {
         }
     }
 
+    public static void w(String msg, Throwable tr) {
+        if (showLog) {
+            Log.w(buildLogTag(), msg, tr);
+        }
+
+        if (logTransfer) {
+            data.setPackageName(packageName);
+            data.setLevel(LogType.WARNING.getValue());
+            data.setTag(buildLogTag());
+            data.setMsg(msg);
+            data.setTime(System.currentTimeMillis());
+            logDataTransfer(data);
+        }
+    }
+
+    public static void w(JSONObject msg, Throwable tr) {
+        if (showLog) {
+            Log.w(buildLogTag(), msg.toString(), tr);
+        }
+
+        if (logTransfer) {
+            data.setPackageName(packageName);
+            data.setLevel(LogType.WARNING.getValue());
+            data.setTag(buildLogTag());
+            data.setMsg(msg);
+            data.setTime(System.currentTimeMillis());
+            logDataTransfer(data);
+        }
+    }
+
     /**
      * error
      * 심각한 에러를 나타내는 로그
@@ -239,6 +359,36 @@ public final class Logcat {
     }
 
     public static void e(JSONObject msg) {
+        if (showLog) {
+            Log.e(buildLogTag(), msg.toString());
+        }
+
+        if (logTransfer) {
+            data.setPackageName(packageName);
+            data.setLevel(LogType.ERROR.getValue());
+            data.setTag(buildLogTag());
+            data.setMsg(msg);
+            data.setTime(System.currentTimeMillis());
+            logDataTransfer(data);
+        }
+    }
+
+    public static void e(String msg, Throwable tr) {
+        if (showLog) {
+            Log.e(buildLogTag(), msg);
+        }
+
+        if (logTransfer) {
+            data.setPackageName(packageName);
+            data.setLevel(LogType.ERROR.getValue());
+            data.setTag(buildLogTag());
+            data.setMsg(msg);
+            data.setTime(System.currentTimeMillis());
+            logDataTransfer(data);
+        }
+    }
+
+    public static void e(JSONObject msg, Throwable tr) {
         if (showLog) {
             Log.e(buildLogTag(), msg.toString());
         }
