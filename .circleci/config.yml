@@ -32,5 +32,5 @@ jobs:
       - run:
           name: gradlew build
           command:
-            - chmod +x gradlew
-            - ./gradlew clean build
+            chmod +x gradlew
+            ./gradlew clean build
