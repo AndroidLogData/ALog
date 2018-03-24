@@ -1,0 +1,10 @@
+language: android
+jdk: oraclejdk8
+
+android:
+  components:
+    - build-tools-26.1.0
+    - android-26
+
+script:
+  - sudo ./gradlew clean build
