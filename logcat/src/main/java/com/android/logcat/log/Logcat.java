@@ -10,17 +10,15 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.android.logcat.http.HttpServiceProvider;
 import com.android.logcat.http.CreateHttpServiceProvider;
 import com.android.logcat.http.HttpCallback;
+import com.android.logcat.http.HttpServiceProvider;
 import com.android.logcat.http.VolleyManager;
 import com.android.logcat.memory.MemoryChecker;
 import com.android.logcat.util.LogType;
 import com.android.logcat.util.Utility;
 import com.android.logcat.vo.LogVO;
 import com.android.logcat.vo.MemoryVO;
-
-import org.json.JSONObject;
 
 
 public final class Logcat {
@@ -79,22 +77,7 @@ public final class Logcat {
      *
      * @param msg
      */
-    public static void v(String msg) {
-        if (showLog) {
-            Log.v(buildLogTag(), msg);
-        }
-
-        if (logTransfer) {
-            data.setPackageName(packageName);
-            data.setLevel(LogType.VERB.getValue());
-            data.setTag(buildLogTag());
-            data.setMsg(msg);
-            data.setTime(System.currentTimeMillis());
-            logDataTransfer(data);
-        }
-    }
-
-    public static void v(JSONObject msg) {
+    public static void v(Object msg) {
         if (showLog) {
             Log.v(buildLogTag(), msg.toString());
         }
@@ -109,24 +92,9 @@ public final class Logcat {
         }
     }
 
-    public static void v(String msg, Throwable tr) {
+    public static void v(Object msg, Throwable tr) {
         if (showLog) {
-            Log.v(buildLogTag(), msg, tr);
-        }
-
-        if (logTransfer) {
-            data.setPackageName(packageName);
-            data.setLevel(LogType.VERB.getValue());
-            data.setTag(buildLogTag());
-            data.setMsg(msg);
-            data.setTime(System.currentTimeMillis());
-            logDataTransfer(data);
-        }
-    }
-
-    public static void v(JSONObject msg, Throwable tr) {
-        if (showLog) {
-            Log.v(buildLogTag(), msg.toString(), tr);
+            Log.v(buildLogTag(), msg.toString());
         }
 
         if (logTransfer) {
@@ -145,22 +113,7 @@ public final class Logcat {
      *
      * @param msg
      */
-    public static void d(String msg) {
-        if (showLog) {
-            Log.d(buildLogTag(), msg);
-        }
-
-        if (logTransfer) {
-            data.setPackageName(packageName);
-            data.setLevel(LogType.DEBUG.getValue());
-            data.setTag(buildLogTag());
-            data.setMsg(msg);
-            data.setTime(System.currentTimeMillis());
-            logDataTransfer(data);
-        }
-    }
-
-    public static void d(JSONObject msg) {
+    public static void d(Object msg) {
         if (showLog) {
             Log.d(buildLogTag(), msg.toString());
         }
@@ -175,22 +128,7 @@ public final class Logcat {
         }
     }
 
-    public static void d(String msg, Throwable tr) {
-        if (showLog) {
-            Log.d(buildLogTag(), msg, tr);
-        }
-
-        if (logTransfer) {
-            data.setPackageName(packageName);
-            data.setLevel(LogType.DEBUG.getValue());
-            data.setTag(buildLogTag());
-            data.setMsg(msg);
-            data.setTime(System.currentTimeMillis());
-            logDataTransfer(data);
-        }
-    }
-
-    public static void d(JSONObject msg, Throwable tr) {
+    public static void d(Object msg, Throwable tr) {
         if (showLog) {
             Log.d(buildLogTag(), msg.toString(), tr);
         }
@@ -211,22 +149,7 @@ public final class Logcat {
      *
      * @param msg
      */
-    public static void i(String msg) {
-        if (showLog) {
-            Log.i(buildLogTag(), msg);
-        }
-
-        if (logTransfer) {
-            data.setPackageName(packageName);
-            data.setLevel(LogType.INFO.getValue());
-            data.setTag(buildLogTag());
-            data.setMsg(msg);
-            data.setTime(System.currentTimeMillis());
-            logDataTransfer(data);
-        }
-    }
-
-    public static void i(JSONObject msg) {
+    public static void i(Object msg) {
         if (showLog) {
             Log.i(buildLogTag(), msg.toString());
         }
@@ -241,22 +164,7 @@ public final class Logcat {
         }
     }
 
-    public static void i(String msg, Throwable tr) {
-        if (showLog) {
-            Log.i(buildLogTag(), msg, tr);
-        }
-
-        if (logTransfer) {
-            data.setPackageName(packageName);
-            data.setLevel(LogType.INFO.getValue());
-            data.setTag(buildLogTag());
-            data.setMsg(msg);
-            data.setTime(System.currentTimeMillis());
-            logDataTransfer(data);
-        }
-    }
-
-    public static void i(JSONObject msg, Throwable tr) {
+    public static void i(Object msg, Throwable tr) {
         if (showLog) {
             Log.i(buildLogTag(), msg.toString(), tr);
         }
@@ -277,22 +185,7 @@ public final class Logcat {
      *
      * @param msg
      */
-    public static void w(String msg) {
-        if (showLog) {
-            Log.w(buildLogTag(), msg);
-        }
-
-        if (logTransfer) {
-            data.setPackageName(packageName);
-            data.setLevel(LogType.WARNING.getValue());
-            data.setTag(buildLogTag());
-            data.setMsg(msg);
-            data.setTime(System.currentTimeMillis());
-            logDataTransfer(data);
-        }
-    }
-
-    public static void w(JSONObject msg) {
+    public static void w(Object msg) {
         if (showLog) {
             Log.w(buildLogTag(), msg.toString());
         }
@@ -307,22 +200,7 @@ public final class Logcat {
         }
     }
 
-    public static void w(String msg, Throwable tr) {
-        if (showLog) {
-            Log.w(buildLogTag(), msg, tr);
-        }
-
-        if (logTransfer) {
-            data.setPackageName(packageName);
-            data.setLevel(LogType.WARNING.getValue());
-            data.setTag(buildLogTag());
-            data.setMsg(msg);
-            data.setTime(System.currentTimeMillis());
-            logDataTransfer(data);
-        }
-    }
-
-    public static void w(JSONObject msg, Throwable tr) {
+    public static void w(Object msg, Throwable tr) {
         if (showLog) {
             Log.w(buildLogTag(), msg.toString(), tr);
         }
@@ -343,22 +221,7 @@ public final class Logcat {
      *
      * @param msg
      */
-    public static void e(String msg) {
-        if (showLog) {
-            Log.e(buildLogTag(), msg);
-        }
-
-        if (logTransfer) {
-            data.setPackageName(packageName);
-            data.setLevel(LogType.ERROR.getValue());
-            data.setTag(buildLogTag());
-            data.setMsg(msg);
-            data.setTime(System.currentTimeMillis());
-            logDataTransfer(data);
-        }
-    }
-
-    public static void e(JSONObject msg) {
+    public static void e(Object msg) {
         if (showLog) {
             Log.e(buildLogTag(), msg.toString());
         }
@@ -373,22 +236,7 @@ public final class Logcat {
         }
     }
 
-    public static void e(String msg, Throwable tr) {
-        if (showLog) {
-            Log.e(buildLogTag(), msg, tr);
-        }
-
-        if (logTransfer) {
-            data.setPackageName(packageName);
-            data.setLevel(LogType.ERROR.getValue());
-            data.setTag(buildLogTag());
-            data.setMsg(msg);
-            data.setTime(System.currentTimeMillis());
-            logDataTransfer(data);
-        }
-    }
-
-    public static void e(JSONObject msg, Throwable tr) {
+    public static void e(Object msg, Throwable tr) {
         if (showLog) {
             Log.e(buildLogTag(), msg.toString(), tr);
         }

@@ -11,6 +11,9 @@ import com.android.logcat.log.Logcat;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -27,6 +30,11 @@ public class MainActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        ArrayList<String> a = new ArrayList<>();
+        a.add("Hi");
+        a.add("Hello");
+        HashMap<String, String> map = new HashMap<>();
+        map.put("Hi", "Hello");
 
         Logcat.v("example");
         Logcat.i("example");
@@ -39,6 +47,12 @@ public class MainActivity extends AppCompatActivity {
         Logcat.d(jsonObject);
         Logcat.w(jsonObject);
         Logcat.e(jsonObject);
+
+        Logcat.v(a);
+        Logcat.i(map);
+        Logcat.d(true);
+        Logcat.w(1);
+        Logcat.e(1.0);
 
         Button button1 = (Button) findViewById(R.id.main_activity_one_btn);
         Button button2 = (Button) findViewById(R.id.main_activity_two_btn);
