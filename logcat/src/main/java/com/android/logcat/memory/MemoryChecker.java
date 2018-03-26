@@ -3,6 +3,8 @@ package com.android.logcat.memory;
 import android.app.ActivityManager;
 import android.app.ActivityManager.MemoryInfo;
 import android.content.Context;
+import android.os.Debug;
+import android.util.Log;
 
 import com.android.logcat.vo.MemoryVO;
 
@@ -29,46 +31,40 @@ public class MemoryChecker {
     }
 
     public MemoryVO getMemoryInfo() {
+        Runtime runtime = Runtime.getRuntime();
+        // 현재 할당된 힙 메모리 중 사용가능한 크기
+//        Log.i("freeMemory", String.valueOf(runtime.freeMemory()));
+        // 최대로 할당될 수 있는 메모리 크기
+//        Log.i("maxMemory", String.valueOf(runtime.maxMemory()));
+        // 현재 힙에 할당된 총 메모리 크기
+//        Log.i("totalMemory", String.valueOf(runtime.totalMemory()));
+
         activityMemoryInfo = new MemoryInfo();
         activityManager = (ActivityManager) context.getSystemService(ACTIVITY_SERVICE);
         activityManager.getMemoryInfo(activityMemoryInfo);
 
-        MemoryVO memoryVO = null;
-        runningAppProcesses = activityManager.getRunningAppProcesses();
-        pidMap = new TreeMap<Integer, String>();
+//        Log.i("memoryInfoTotalMemory", String.valueOf(activityMemoryInfo.totalMem));
+//        Log.i("memoryInfoAvailMemory", String.valueOf(activityMemoryInfo.availMem));
 
-        for (ActivityManager.RunningAppProcessInfo runningAppProcessInfo : runningAppProcesses) {
-            pidMap.put(runningAppProcessInfo.pid, runningAppProcessInfo.processName);
-        }
+        Double allocated = (double) ((Debug.getNativeHeapAllocatedSize()) / 1024);
+        Double available = (double) ((Debug.getNativeHeapSize()) / 1024);
+        Double free = (double) ((Debug.getNativeHeapFreeSize()) / 1024);
+//        Log.e("free ", String.valueOf(free));
+//        Log.e("allocated ", String.valueOf(allocated));
+//        Log.e("available ", String.valueOf(available));
 
-        Collection<Integer> keys = pidMap.keySet();
-
-        for (int key : keys) {
-            int pids[] = new int[1];
-            pids[0] = key;
-            android.os.Debug.MemoryInfo[] memoryInfoArray = activityManager.getProcessMemoryInfo(pids);
-            for (android.os.Debug.MemoryInfo pidMemoryInfo : memoryInfoArray) {
-//                Log.i("MemoryChecker", String.format("** MEMINFO in pid %d [%s] **\n", pids[0], pidMap.get(pids[0])));
-                if (context.getPackageName().equals(pidMap.get(pids[0]))) {
-                    memoryVO = new MemoryVO(
-                            // 전체 메모리
-                            activityMemoryInfo.totalMem,
-                            // 사용가능한 메모리
-                            activityMemoryInfo.availMem,
-                            // 메모리 백분율
-                            100.0 * (((double) activityMemoryInfo.totalMem - (double) activityMemoryInfo.availMem) / (double) activityMemoryInfo.totalMem),
-                            // 메모리 임계값
-                            activityMemoryInfo.threshold,
-                            // 메모리가 부족하다면 true
-                            activityMemoryInfo.lowMemory,
-                            pidMemoryInfo.dalvikPss,
-                            pidMemoryInfo.nativePss,
-                            pidMemoryInfo.otherPss,
-                            pidMemoryInfo.getTotalPss());
-                }
-            }
-        }
-
-        return memoryVO;
+        return new MemoryVO(
+                runtime.freeMemory(),
+                runtime.maxMemory(),
+                runtime.totalMemory(),
+                activityMemoryInfo.totalMem,
+                activityMemoryInfo.availMem,
+                100.0 * (((double) activityMemoryInfo.totalMem - (double) activityMemoryInfo.availMem) / (double) activityMemoryInfo.totalMem),
+                activityMemoryInfo.threshold,
+                activityMemoryInfo.lowMemory,
+                free,
+                allocated,
+                available
+        );
     }
 }

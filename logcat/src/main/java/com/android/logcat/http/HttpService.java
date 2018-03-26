@@ -52,10 +52,12 @@ public class HttpService implements HttpServiceList {
             memoryInfo.put("memoryPercentage", data.getMemory().getMemoryPercentage());
             memoryInfo.put("threshold", data.getMemory().getThreshold());
             memoryInfo.put("lowMemory", data.getMemory().isLowMemory());
-            memoryInfo.put("dalvikPss", data.getMemory().getDalvikPss());
-            memoryInfo.put("nativePss", data.getMemory().getNativePss());
-            memoryInfo.put("otherPss", data.getMemory().getOtherPss());
-            memoryInfo.put("totalPss", data.getMemory().getTotalPss());
+            memoryInfo.put("debugNativeFree", data.getMemory().getDebugNativeFree());
+            memoryInfo.put("debugNativeAllocated", data.getMemory().getDebugNativeAllocated());
+            memoryInfo.put("debugNativeAvailable", data.getMemory().getDebugNativeAvailable());
+            memoryInfo.put("nativeFreeMemory", data.getMemory().getNativeFreeMemory());
+            memoryInfo.put("nativeMaxMemory", data.getMemory().getNativeMaxMemory());
+            memoryInfo.put("nativeTotalMemory", data.getMemory().getNativeTotalMemory());
 
             jsonObject.put("memoryInfo", memoryInfo);
             return jsonObject;

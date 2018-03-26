@@ -5,39 +5,78 @@ package com.android.logcat.vo;
  */
 
 public class MemoryVO {
+    /**
+     * Native Heap Memory
+     */
+    private long nativeFreeMemory;
+    private long nativeMaxMemory;
+    private long nativeTotalMemory;
+    /**
+     * Memory Information
+     */
     private long totalMemory;
     private long availMemory;
     private double memoryPercentage;
     private long threshold;
     private boolean lowMemory;
-    private int dalvikPss;
-    private int nativePss;
-    private int otherPss;
-    private int totalPss;
+    /**
+     * Debug Native Heap
+     */
+    private double debugNativeFree;
+    private double debugNativeAllocated;
+    private double debugNativeAvailable;
 
-    public MemoryVO(long totalMemory, long availMemory, double memoryPercentage, long threshold, boolean lowMemory, int dalvikPss, int nativePss, int otherPss, int totalPss) {
+    public MemoryVO(long nativeFreeMemory, long nativeMaxMemory, long nativeTotalMemory, long totalMemory, long availMemory, double memoryPercentage, long threshold, boolean lowMemory, double debugNativeFree, double debugNativeAllocated, double debugNativeAvailable) {
+        this.nativeFreeMemory = nativeFreeMemory;
+        this.nativeMaxMemory = nativeMaxMemory;
+        this.nativeTotalMemory = nativeTotalMemory;
         this.totalMemory = totalMemory;
         this.availMemory = availMemory;
         this.memoryPercentage = memoryPercentage;
         this.threshold = threshold;
         this.lowMemory = lowMemory;
-        this.dalvikPss = dalvikPss;
-        this.nativePss = nativePss;
-        this.otherPss = otherPss;
-        this.totalPss = totalPss;
+        this.debugNativeFree = debugNativeFree;
+        this.debugNativeAllocated = debugNativeAllocated;
+        this.debugNativeAvailable = debugNativeAvailable;
     }
 
     public MemoryVO(MemoryVO memoryVO) {
         this(
+                memoryVO.nativeFreeMemory,
+                memoryVO.nativeMaxMemory,
+                memoryVO.nativeTotalMemory,
                 memoryVO.totalMemory,
                 memoryVO.availMemory,
                 memoryVO.memoryPercentage,
                 memoryVO.threshold,
                 memoryVO.lowMemory,
-                memoryVO.dalvikPss,
-                memoryVO.nativePss,
-                memoryVO.otherPss,
-                memoryVO.totalPss);
+                memoryVO.debugNativeFree,
+                memoryVO.debugNativeAllocated,
+                memoryVO.debugNativeAvailable);
+    }
+
+    public long getNativeFreeMemory() {
+        return nativeFreeMemory;
+    }
+
+    public void setNativeFreeMemory(long nativeFreeMemory) {
+        this.nativeFreeMemory = nativeFreeMemory;
+    }
+
+    public long getNativeMaxMemory() {
+        return nativeMaxMemory;
+    }
+
+    public void setNativeMaxMemory(long nativeMaxMemory) {
+        this.nativeMaxMemory = nativeMaxMemory;
+    }
+
+    public long getNativeTotalMemory() {
+        return nativeTotalMemory;
+    }
+
+    public void setNativeTotalMemory(long nativeTotalMemory) {
+        this.nativeTotalMemory = nativeTotalMemory;
     }
 
     public long getTotalMemory() {
@@ -80,48 +119,27 @@ public class MemoryVO {
         this.lowMemory = lowMemory;
     }
 
-    public int getDalvikPss() {
-        return dalvikPss;
+    public double getDebugNativeFree() {
+        return debugNativeFree;
     }
 
-    public void setDalvikPss(int dalvikPss) {
-        this.dalvikPss = dalvikPss;
+    public void setDebugNativeFree(double debugNativeFree) {
+        this.debugNativeFree = debugNativeFree;
     }
 
-    public int getNativePss() {
-        return nativePss;
+    public double getDebugNativeAllocated() {
+        return debugNativeAllocated;
     }
 
-    public void setNativePss(int nativePss) {
-        this.nativePss = nativePss;
+    public void setDebugNativeAllocated(double debugNativeAllocated) {
+        this.debugNativeAllocated = debugNativeAllocated;
     }
 
-    public int getOtherPss() {
-        return otherPss;
+    public double getDebugNativeAvailable() {
+        return debugNativeAvailable;
     }
 
-    public void setOtherPss(int otherPss) {
-        this.otherPss = otherPss;
+    public void setDebugNativeAvailable(double debugNativeAvailable) {
+        this.debugNativeAvailable = debugNativeAvailable;
     }
-
-    public int getTotalPss() {
-        return totalPss;
-    }
-
-    public void setTotalPss(int totalPss) {
-        this.totalPss = totalPss;
-    }
-
-//    @Override
-//    public String toString() {
-//        return "Total Memory : " + getTotalMemory() + "\n" +
-//                "Avail Memory : " + getAvailMemory() + "\n" +
-//                "Memory Percentage : " + getMemoryPercentage() + "\n" +
-//                "Threshold : " + getThreshold() + "\n" +
-//                "Low Memory : " + isLowMemory() + "\n" +
-//                "Dalvik Pss : " + getDalvikPss() + "\n" +
-//                "Native Pss : " + getNativePss() + "\n" +
-//                "Other Pss : " + getOtherPss() + "\n" +
-//                "Total Pss : " + getTotalPss() + "\n";
-//    }
 }
