@@ -20,9 +20,9 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
-#-keep public final class Logcat
-#
-#-renamesourcefileattribute SourceFile
-#
-#-keep class com.android.volley.toolbox.Volley.** { *; }
-#-keep class org.acra.annotation.AcraCore.** { *; }
+-keep public final class Logcat
+
+-renamesourcefileattribute SourceFile
+
+-keep class com.android.volley.**
+-keep class org.acra.**
