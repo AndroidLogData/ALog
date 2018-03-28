@@ -34,4 +34,6 @@ dependencies {
 
     api dep.volley
     implementation dep.acracore
+
+    implementation files('libs/jni-release.aar')
 }
