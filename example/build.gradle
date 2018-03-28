@@ -23,6 +23,12 @@ android {
         }
     }
 
+    packagingOptions {
+        exclude 'lib/x86_64/libjni.so'
+        exclude 'lib/arm64-v8a/libjni.so'
+        exclude 'lib/x86/libjni.so'
+        exclude 'lib/armeabi-v7a/libjni.so'
+    }
 }
 
 dependencies {
