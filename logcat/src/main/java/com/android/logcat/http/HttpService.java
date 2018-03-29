@@ -3,13 +3,13 @@ package com.android.logcat.http;
 import android.net.Uri;
 import android.util.Log;
 
-import com.android.logcat.jni.JNIConstant;
 import com.android.logcat.util.TransferType;
 import com.android.logcat.vo.LogVO;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.library.bowoon.module.Constant;
 
 import org.acra.ReportField;
 import org.acra.data.CrashReportData;
@@ -18,11 +18,9 @@ import org.json.JSONObject;
 
 public class HttpService implements HttpServiceList {
     private String makeURL(TransferType type) {
-        JNIConstant jniConstant = new JNIConstant();
-
         Uri.Builder uri = new Uri.Builder();
         uri.scheme("http");
-        uri.encodedAuthority(jniConstant.getServerAddress() + ":" + jniConstant.getServerPort());
+        uri.encodedAuthority(Constant.getAddress() + ":" + Constant.getPort());
 //        uri.encodedAuthority("192.168.0.7:8080");
 
         switch (type) {
