@@ -3,8 +3,9 @@ package com.android.logcat.http;
 import android.net.Uri;
 import android.util.Log;
 
-import com.android.logcat.vo.LogVO;
+import com.android.logcat.module.Constant;
 import com.android.logcat.util.TransferType;
+import com.android.logcat.vo.LogVO;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -19,7 +20,7 @@ public class HttpService implements HttpServiceList {
     private String makeURL(TransferType type) {
         Uri.Builder uri = new Uri.Builder();
         uri.scheme("http");
-        uri.encodedAuthority("52.231.31.239:8080");
+        uri.encodedAuthority(Constant.getAddress() + ":" + Constant.getPort());
 //        uri.encodedAuthority("192.168.0.7:8080");
 
         switch (type) {
@@ -47,19 +48,22 @@ public class HttpService implements HttpServiceList {
             jsonObject.put("level", data.getLevel());
             jsonObject.put("time", data.getTime());
 
-            memoryInfo.put("totalMemory", data.getMemory().getTotalMemory());
-            memoryInfo.put("availMemory", data.getMemory().getAvailMemory());
-            memoryInfo.put("memoryPercentage", data.getMemory().getMemoryPercentage());
-            memoryInfo.put("threshold", data.getMemory().getThreshold());
-            memoryInfo.put("lowMemory", data.getMemory().isLowMemory());
-            memoryInfo.put("debugNativeFree", data.getMemory().getDebugNativeFree());
-            memoryInfo.put("debugNativeAllocated", data.getMemory().getDebugNativeAllocated());
-            memoryInfo.put("debugNativeAvailable", data.getMemory().getDebugNativeAvailable());
-            memoryInfo.put("nativeFreeMemory", data.getMemory().getNativeFreeMemory());
-            memoryInfo.put("nativeMaxMemory", data.getMemory().getNativeMaxMemory());
-            memoryInfo.put("nativeTotalMemory", data.getMemory().getNativeTotalMemory());
+            if (data.getMemory() != null) {
+                memoryInfo.put("totalMemory", data.getMemory().getTotalMemory());
+                memoryInfo.put("availMemory", data.getMemory().getAvailMemory());
+                memoryInfo.put("memoryPercentage", data.getMemory().getMemoryPercentage());
+                memoryInfo.put("threshold", data.getMemory().getThreshold());
+                memoryInfo.put("lowMemory", data.getMemory().isLowMemory());
+                memoryInfo.put("debugNativeFree", data.getMemory().getDebugNativeFree());
+                memoryInfo.put("debugNativeAllocated", data.getMemory().getDebugNativeAllocated());
+                memoryInfo.put("debugNativeAvailable", data.getMemory().getDebugNativeAvailable());
+                memoryInfo.put("nativeFreeMemory", data.getMemory().getNativeFreeMemory());
+                memoryInfo.put("nativeMaxMemory", data.getMemory().getNativeMaxMemory());
+                memoryInfo.put("nativeTotalMemory", data.getMemory().getNativeTotalMemory());
 
-            jsonObject.put("memoryInfo", memoryInfo);
+                jsonObject.put("memoryInfo", memoryInfo);
+            }
+
             return jsonObject;
         } catch (JSONException e) {
             e.printStackTrace();
