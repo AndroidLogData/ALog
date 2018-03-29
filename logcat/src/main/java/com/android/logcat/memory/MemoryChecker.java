@@ -4,14 +4,8 @@ import android.app.ActivityManager;
 import android.app.ActivityManager.MemoryInfo;
 import android.content.Context;
 import android.os.Debug;
-import android.util.Log;
 
 import com.android.logcat.vo.MemoryVO;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 import static android.content.Context.ACTIVITY_SERVICE;
 
@@ -23,8 +17,6 @@ public class MemoryChecker {
     private Context context;
     private MemoryInfo activityMemoryInfo;
     private ActivityManager activityManager;
-    private List<ActivityManager.RunningAppProcessInfo> runningAppProcesses;
-    private Map<Integer, String> pidMap;
 
     public MemoryChecker(Context context) {
         this.context = context;
