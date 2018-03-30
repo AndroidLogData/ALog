@@ -3,8 +3,6 @@ apply plugin: 'com.android.library'
 android {
     compileSdkVersion 26
 
-
-
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 26
@@ -13,6 +11,13 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        ndk {
+            // Specifies the ABI configurations of your native
+            // libraries Gradle should build and package with your APK.
+            moduleName 'module'
+//            abiFilters 'x86', 'x86_64', 'armeabi', 'armeabi-v7a',
+//                    'arm64-v8a', 'mips', 'mips64'
+        }
     }
 
     buildTypes {
@@ -20,6 +25,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    sourceSets.main {
+        jniLibs.srcDir 'src/main/jni'
+        jni.srcDirs = [] //important!!!! disable automatic ndk-build call
     }
 }
 
