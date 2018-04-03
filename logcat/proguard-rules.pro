@@ -22,12 +22,14 @@
 
 -keep class com.android.volley.**
 -keep class org.acra.**
+-keep class com.android.logcat.log.Logcat
 
 -dontnote org.apache.http.**
 -dontnote android.net.http.**
 -dontnote org.acra.**
 
--keep class com.android.logcat.log.Logcat
 -keepclassmembers class com.android.logcat.log.Logcat { public *; }
+-keepclassmembers class com.android.volley.**
+-keepclassmembers class org.acra.**
 
 -renamesourcefileattribute SourceFile

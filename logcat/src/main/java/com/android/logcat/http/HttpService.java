@@ -3,13 +3,13 @@ package com.android.logcat.http;
 import android.net.Uri;
 import android.util.Log;
 
-import com.android.logcat.module.Constant;
 import com.android.logcat.util.TransferType;
 import com.android.logcat.vo.LogVO;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.bowoon.android.jni.Constant;
 
 import org.acra.ReportField;
 import org.acra.data.CrashReportData;
