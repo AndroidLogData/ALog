@@ -20,9 +20,14 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
-#-keep public final class *
-#
-#-renamesourcefileattribute SourceFile
-#
-#-keep class com.android.volley.**
-#-keep class org.acra.**
+-keep class com.android.volley.**
+-keep class org.acra.**
+
+-dontnote org.apache.http.**
+-dontnote android.net.http.**
+-dontnote org.acra.**
+
+-keep class com.android.logcat.log.Logcat
+-keepclassmembers class com.android.logcat.log.Logcat { public *; }
+
+-renamesourcefileattribute SourceFile
