@@ -22,13 +22,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
-    packagingOptions {
-        exclude 'lib/x86_64/libmodule.so'
-        exclude 'lib/arm64-v8a/libmodule.so'
-        exclude 'lib/x86/libmodule.so'
-        exclude 'lib/armeabi-v7a/libmodule.so'
-    }
 }
 
 dependencies {
