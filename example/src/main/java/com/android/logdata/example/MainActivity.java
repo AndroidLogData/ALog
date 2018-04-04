@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.android.logcat.log.Logcat;
+import com.android.logcat.log.ALog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,8 +21,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Logcat.logSetting(getApplicationContext(), true, true);
-        Logcat.setDebug(true);
+        ALog.logSetting(getApplicationContext(), true, true);
+        ALog.setDebug(true);
 
         JSONObject jsonObject = new JSONObject();
         try {
@@ -36,23 +36,23 @@ public class MainActivity extends AppCompatActivity {
         HashMap<String, String> map = new HashMap<>();
         map.put("Hi", "Hello");
 
-        Logcat.v("example");
-        Logcat.i("example");
-        Logcat.d("example");
-        Logcat.w("example");
-        Logcat.e("example");
+        ALog.v("example");
+        ALog.i("example");
+        ALog.d("example");
+        ALog.w("example");
+        ALog.e("example");
 
-        Logcat.v(jsonObject);
-        Logcat.i(jsonObject);
-        Logcat.d(jsonObject);
-        Logcat.w(jsonObject);
-        Logcat.e(jsonObject);
+        ALog.v(jsonObject);
+        ALog.i(jsonObject);
+        ALog.d(jsonObject);
+        ALog.w(jsonObject);
+        ALog.e(jsonObject);
 
-        Logcat.v(a);
-        Logcat.i(map);
-        Logcat.d(true);
-        Logcat.w(1);
-        Logcat.e(1.0);
+        ALog.v(a);
+        ALog.i(map);
+        ALog.d(true);
+        ALog.w(1);
+        ALog.e(1.0);
 
         Button button1 = (Button) findViewById(R.id.main_activity_one_btn);
         Button button2 = (Button) findViewById(R.id.main_activity_two_btn);
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(getApplicationContext(), ActivityOne.class);
-            Logcat.v("activityOne intent");
+            ALog.v("activityOne intent");
             startActivity(intent);
         }
     };
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(getApplicationContext(), ActivityTwo.class);
-            Logcat.v("activityTwo intent");
+            ALog.v("activityTwo intent");
             startActivity(intent);
         }
     };
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
     Button.OnClickListener listener3 = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Logcat.e("NullPointerException");
+            ALog.e("NullPointerException");
             throw new NullPointerException();
         }
     };
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
     Button.OnClickListener listener4 = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Logcat.e("ArrayIndexOutOfBoundsException");
+            ALog.e("ArrayIndexOutOfBoundsException");
             throw new ArrayIndexOutOfBoundsException();
         }
     };
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
     Button.OnClickListener listener5 = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Logcat.e("IllegalArgumentException");
+            ALog.e("IllegalArgumentException");
             throw new IllegalArgumentException();
         }
     };
@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
     Button.OnClickListener listener6 = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Logcat.e("ArithmeticException");
+            ALog.e("ArithmeticException");
             throw new ArithmeticException();
         }
     };
@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
     Button.OnClickListener listener7 = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Logcat.e("StackOverflowError");
+            ALog.e("StackOverflowError");
             throw new StackOverflowError();
         }
     };

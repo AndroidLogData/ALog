@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.android.logcat.log.Logcat;
+import com.android.logcat.log.ALog;
 
 /**
  * Created by Null on 2018-02-21.
@@ -21,11 +21,11 @@ public class ActivityOne extends AppCompatActivity {
         for (int i = 0; i < longArray1.length; i++) {
             longArray1[i] = i;
         }
-        Logcat.i("long array1");
+        ALog.i("long array1");
 
         for (int i = 0; i < longArray2.length; i++) {
             longArray2[i] = (long) i;
         }
-        Logcat.i("long array2");
+        ALog.i("long array2");
     }
 }

@@ -29,8 +29,6 @@ dependencies {
 [Example](https://github.com/AndroidLogData/Logdata-Android/tree/develop/example)
 * AndroidManifest.xml에 ```meta-data```추가
 ```xml
-<uses-permission android:name="android.permission.INTERNET" />
-...
 <meta-data android:name="com.logcat.apiKey"
 	android:value="<InsertYourKey>"/>
 ```
@@ -50,9 +48,9 @@ public class MainActivity extends AppCompatActivity {
         * @param Logcat에서 로그를 보기위한 설정
         * @param 서버로 로그 데이터를 보내기 위한 설정
         */
-        Logcat.logSetting(getApplicationContext(), true, true);
+        ALog.logSetting(getApplicationContext(), true, true);
         // 서버로 메모리 데이터도 같이 전송
-        Logcat.setDebug(true);
+        ALog.setDebug(true);
     }
 }
 ```

@@ -22,13 +22,13 @@
 
 -keep class com.android.volley.**
 -keep class org.acra.**
--keep class com.android.logcat.log.Logcat
+-keep class com.android.logcat.log.ALog
 
 -dontnote org.apache.http.**
 -dontnote android.net.http.**
 -dontnote org.acra.**
 
--keepclassmembers class com.android.logcat.log.Logcat { public *; }
+-keepclassmembers class com.android.logcat.log.ALog { public *; }
 -keepclassmembers class com.android.volley.**
 -keepclassmembers class org.acra.**
 
