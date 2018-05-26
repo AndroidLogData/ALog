@@ -22,7 +22,7 @@
 
 -keep class com.android.volley.**
 -keep class org.acra.**
--keep class com.android.logcat.log.ALog
+-keep class com.android.logcat.log.ALog { public static *; }
 
 -dontnote org.apache.http.**
 -dontnote android.net.http.**
