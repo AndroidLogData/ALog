@@ -50,7 +50,7 @@ public class HttpOption {
     }
 
     public void setSecretKey(String secretKey) {
-        setHeaders("secretKey", secretKey);
+        setHeaders("apiKey", secretKey);
     }
 
     private void setHeaders(String key, String value) {

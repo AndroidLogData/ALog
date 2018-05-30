@@ -28,7 +28,7 @@ public class HttpService implements HttpServiceList {
                 uri.path("crash");
                 break;
             case LOG_DATA:
-                uri.path("logdata");
+                uri.path("log-data");
                 break;
             default:
                 break;
