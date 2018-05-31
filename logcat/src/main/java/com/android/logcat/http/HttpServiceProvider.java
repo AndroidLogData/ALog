@@ -3,13 +3,11 @@ package com.android.logcat.http;
 public class HttpServiceProvider {
     private HttpServiceProvider() {} // 인스턴스 생성 X
 
-    private static HttpService provider;
+    private static class Singleton {
+        private static final HttpService provider = new HttpService();
+    }
 
     public static HttpService getInstance() {
-        if (provider == null) {
-            provider = new HttpService();
-        }
-
-        return provider;
+        return Singleton.provider;
     }
 }
