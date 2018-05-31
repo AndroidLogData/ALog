@@ -10,7 +10,6 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.android.logcat.http.CreateHttpServiceProvider;
 import com.android.logcat.http.HttpCallback;
 import com.android.logcat.http.HttpServiceProvider;
 import com.android.logcat.http.VolleyManager;
@@ -39,7 +38,6 @@ public final class ALog {
             throw new IllegalArgumentException("Need Context");
         }
 
-        HttpServiceProvider.registerDefaultProvider(new CreateHttpServiceProvider());
         VolleyManager.getInstance().setRequestQueue(context);
         memoryChecker = new MemoryChecker(context);
         setApiKey(context);
@@ -282,7 +280,7 @@ public final class ALog {
             data.setMemory(debugMode());
         }
 
-        HttpServiceProvider.newInstance().requestLogData(
+        HttpServiceProvider.getInstance().requestLogData(
                 apiKey,
                 data,
                 new HttpCallback() {

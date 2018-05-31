@@ -21,7 +21,7 @@ public class CrashReport implements ReportSender {
     @Override
     public void send(Context context, CrashReportData report) throws ReportSenderException {
         String apiKey = setApiKey(context);
-        HttpServiceProvider.newInstance().requestCrashData(
+        HttpServiceProvider.getInstance().requestCrashData(
                 apiKey,
                 report,
                 new HttpCallback() {
