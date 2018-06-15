@@ -2,8 +2,8 @@
 |  | Current Status |
 |--------|--------|
 | JitPack | [![](https://jitpack.io/v/AndroidLogData/Logdata-Android.svg)](https://jitpack.io/#AndroidLogData/Logdata-Android) |
-| Travis-CI | [![Build Status](https://travis-ci.org/AndroidLogData/Logdata-Android.svg?branch=develop)](https://travis-ci.org/AndroidLogData/Logdata-Android) |
-| CircleCI | [![CircleCI](https://circleci.com/gh/AndroidLogData/Logdata-Android.svg?style=svg)](https://circleci.com/gh/AndroidLogData/Logdata-Android) |
+| Travis-CI | [![Build Status](https://travis-ci.org/AndroidLogData/ALog.svg?branch=develop)](https://travis-ci.org/AndroidLogData/ALog) |
+| CircleCI | [![CircleCI](https://circleci.com/gh/AndroidLogData/ALog/tree/develop.svg?style=svg)](https://circleci.com/gh/AndroidLogData/ALog/tree/develop) |
 
 안드로이드 로그 데이터 관리를 위한 안드로이드 라이브러리
 
