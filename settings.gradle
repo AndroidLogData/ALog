@@ -1,1 +1,1 @@
-include ':logcat', ':example'
+include ':alog', ':alog-example'
