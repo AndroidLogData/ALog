@@ -10,9 +10,12 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.bowoon.android.alog.crashlogger.CreateAcra;
 import com.bowoon.android.alog.http.HttpCallback;
 import com.bowoon.android.alog.http.HttpServiceProvider;
 import com.bowoon.android.alog.http.VolleyManager;
+import com.bowoon.android.alog.information.BatteryInformation;
+import com.bowoon.android.alog.information.LocationInformation;
 import com.bowoon.android.alog.memory.MemoryChecker;
 import com.bowoon.android.alog.util.LogType;
 import com.bowoon.android.alog.util.Utility;
@@ -28,6 +31,8 @@ public class ALog {
     private static LogVO data;
     private static MemoryChecker memoryChecker;
     private static String apiKey;
+    private static BatteryInformation batteryInformation;
+    private static LocationInformation locationInformation;
 
     private ALog() throws IllegalAccessException {
         throw new IllegalAccessException("Access Denied");
@@ -41,6 +46,9 @@ public class ALog {
         VolleyManager.getInstance().setRequestQueue(context);
         memoryChecker = new MemoryChecker(context);
         setApiKey(context);
+
+        batteryInformation = new BatteryInformation(context);
+        locationInformation = new LocationInformation(CreateAcra.getGlobalContext());
 
         ALog.showLog = showLog;
         ALog.logTransfer = logTransfer;
@@ -279,6 +287,15 @@ public class ALog {
         if (debug) {
             data.setMemory(debugMode());
         }
+
+        data.setBatteryStatus(batteryInformation.batteryChargeStatus());
+        data.setBatteryCharge(batteryInformation.batteryStatus());
+        data.setLocation(locationInformation.getUserLocation());
+
+        Log.i("Location", String.valueOf(data.getLocation().getLongitude()));
+        Log.i("Location", String.valueOf(data.getLocation().getLatitude()));
+        Log.i("Location", String.valueOf(data.getBatteryCharge()));
+        Log.i("Location", String.valueOf(data.getBatteryStatus()));
 
         HttpServiceProvider.getInstance().requestLogData(
                 apiKey,

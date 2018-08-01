@@ -1,5 +1,7 @@
 package com.bowoon.android.alog.vo;
 
+import android.location.Location;
+
 /**
  * Created by Null on 2018-01-01.
  */
@@ -11,6 +13,9 @@ public class LogVO {
     private String level;
     private long time;
     private MemoryVO memory;
+    private String batteryStatus;
+    private String batteryCharge;
+    private Location location;
 
     public String getPackageName() {
         return packageName;
@@ -58,6 +63,30 @@ public class LogVO {
 
     public void setMemory(MemoryVO memory) {
         this.memory = memory;
+    }
+
+    public String getBatteryStatus() {
+        return batteryStatus;
+    }
+
+    public void setBatteryStatus(String batteryStatus) {
+        this.batteryStatus = batteryStatus;
+    }
+
+    public String getBatteryCharge() {
+        return batteryCharge;
+    }
+
+    public void setBatteryCharge(String batteryCharge) {
+        this.batteryCharge = batteryCharge;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     @Override

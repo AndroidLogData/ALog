@@ -2,13 +2,14 @@ package com.bowoon.android.alog.http;
 
 import android.net.Uri;
 import android.util.Log;
+
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.bowoon.android.alog.util.TransferType;
 import com.bowoon.android.alog.vo.LogVO;
-import com.bowoon.android.jni.Constant;
+
 import org.acra.ReportField;
 import org.acra.data.CrashReportData;
 import org.json.JSONException;
@@ -18,8 +19,8 @@ public class HttpService implements HttpServiceList {
     private String makeURL(TransferType type) {
         Uri.Builder uri = new Uri.Builder();
         uri.scheme("http");
-        uri.encodedAuthority(Constant.getAddress() + ":" + Constant.getPort());
-//        uri.encodedAuthority("192.168.0.7:8080");
+//        uri.encodedAuthority(Constant.getAddress() + ":" + Constant.getPort());
+        uri.encodedAuthority("192.168.0.7:8080");
 
         switch (type) {
             case CRASH:
@@ -39,6 +40,7 @@ public class HttpService implements HttpServiceList {
         try {
             JSONObject jsonObject = new JSONObject();
             JSONObject memoryInfo = new JSONObject();
+            JSONObject deviceInfo = new JSONObject();
 
             jsonObject.put("packageName", data.getPackageName());
             jsonObject.put("message", data.getMsg());
@@ -61,6 +63,21 @@ public class HttpService implements HttpServiceList {
 
                 jsonObject.put("memoryInfo", memoryInfo);
             }
+
+            if (data.getBatteryCharge() != null) {
+                deviceInfo.put("batteryCharge", data.getBatteryCharge());
+            }
+
+            if (data.getBatteryStatus() != null) {
+                deviceInfo.put("batteryStatus", data.getBatteryStatus());
+            }
+
+            if (data.getLocation() != null) {
+                deviceInfo.put("longitude", data.getLocation().getLongitude());
+                deviceInfo.put("latitude", data.getLocation().getLatitude());
+            }
+
+            jsonObject.put("deviceInfo", deviceInfo);
 
             return jsonObject;
         } catch (JSONException e) {
