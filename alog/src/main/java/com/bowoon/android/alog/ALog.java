@@ -288,14 +288,19 @@ public class ALog {
             data.setMemory(debugMode());
         }
 
-        data.setBatteryStatus(batteryInformation.batteryChargeStatus());
-        data.setBatteryCharge(batteryInformation.batteryStatus());
-        data.setLocation(locationInformation.getUserLocation());
-
-        Log.i("Location", String.valueOf(data.getLocation().getLongitude()));
-        Log.i("Location", String.valueOf(data.getLocation().getLatitude()));
-        Log.i("Location", String.valueOf(data.getBatteryCharge()));
-        Log.i("Location", String.valueOf(data.getBatteryStatus()));
+        if (data.getBatteryStatus() != null) {
+            Log.i("Location", String.valueOf(data.getBatteryStatus()));
+            data.setBatteryStatus(batteryInformation.batteryChargeStatus());
+        }
+        if (data.getBatteryCharge() != null) {
+            Log.i("Location", String.valueOf(data.getBatteryCharge()));
+            data.setBatteryCharge(batteryInformation.batteryStatus());
+        }
+        if (data.getLocation() != null) {
+            Log.i("Location", String.valueOf(data.getLocation().getLongitude()));
+            Log.i("Location", String.valueOf(data.getLocation().getLatitude()));
+            data.setLocation(locationInformation.getUserLocation());
+        }
 
         HttpServiceProvider.getInstance().requestLogData(
                 apiKey,

@@ -23,27 +23,18 @@ public class LocationInformation {
             return;
         }
 
-//        Log.i("listener", String.valueOf(locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)));
-//        Log.i("listener", String.valueOf(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)));
-
         if (locationManager != null) {
-            Log.i("listener", "listener");
-//            locationManager.requestLocationUpdates(
-//                    LocationManager.GPS_PROVIDER,
-//                    1000,
-//                    10,
-//                    locationListener
-//            );
-
-            locationManager.requestLocationUpdates(
-                    LocationManager.NETWORK_PROVIDER,
-                    1000,
-                    10,
-                    locationListener
-            );
-            userLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-            Log.i("listener", String.valueOf(userLocation.getLatitude()));
-            Log.i("listener", String.valueOf(userLocation.getLongitude()));
+            if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                locationManager.requestLocationUpdates(
+                        LocationManager.NETWORK_PROVIDER,
+                        1000,
+                        10,
+                        locationListener
+                );
+                userLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                Log.i("listener", String.valueOf(userLocation.getLatitude()));
+                Log.i("listener", String.valueOf(userLocation.getLongitude()));
+            }
         }
     }
 
